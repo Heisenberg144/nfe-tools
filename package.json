@@ -1,0 +1,132 @@
+{
+  "name": "nfe-tools",
+  "displayName": "NFe Tools",
+  "description": "Color themes e ferramentas para NF-e, NFC-e, CT-e, NFS-e e MDF-e",
+  "version": "1.0.0",
+  "publisher": "nfe-tools",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Themes", "Other"],
+  "activationEvents": [
+    "workspaceContains:**/*.xml",
+    "onLanguage:xml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+{
+        "id": "nfe",
+        "aliases": ["NFe", "nfe"], 
+        "extensions": [".xml", ".nfe", ".sped"],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "nfce",
+        "aliases": ["NFC-e", "nfce"],
+        "extensions": [],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "cte",
+        "aliases": ["CT-e", "cte"],
+        "extensions": [],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "nfse",
+        "aliases": ["NFS-e", "nfse"],
+        "extensions": [],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "mdfe",
+        "aliases": ["MDF-e", "mdfe"],
+        "extensions": [],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nfe",
+        "scopeName": "source.nfe",
+        "path": "./syntaxes/nfe.tmLanguage.json"
+      },
+      {
+        "language": "nfce",
+        "scopeName": "source.nfce",
+        "path": "./syntaxes/nfce.tmLanguage.json"
+      },
+      {
+        "language": "cte",
+        "scopeName": "source.cte",
+        "path": "./syntaxes/cte.tmLanguage.json"
+      },
+      {
+        "language": "nfse",
+        "scopeName": "source.nfse",
+        "path": "./syntaxes/nfse.tmLanguage.json"
+      },
+      {
+        "language": "mdfe",
+        "scopeName": "source.mdfe",
+        "path": "./syntaxes/mdfe.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "NFe Fiscal Pro — NF-e Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/nfe-dark.json"
+      },
+      {
+        "label": "NFe Fiscal Pro — NF-e Harmonic Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/nfe-harmonic-dark.json"
+      },
+      {
+        "label": "NFe Fiscal Pro — NFC-e Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/nfce-dark.json"
+      },
+      {
+        "label": "NFe Fiscal Pro — CT-e Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/cte-dark.json"
+      },
+      {
+        "label": "NFe Fiscal Pro — NFS-e Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/nfse-dark.json"
+      },
+      {
+        "label": "NFe Fiscal Pro — MDF-e Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/mdfe-dark.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "nfe-tools.openViewer",
+        "title": "NFe Tools: Abrir Visualizador"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "nfe-tools.openViewer",
+          "when": "resourceExtname == .xml",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}

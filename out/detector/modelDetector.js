@@ -1,0 +1,99 @@
+"use strict";
+/**
+ * Detecta o modelo fiscal de um XML de documento eletrônico.
+ * Estratégia: tag raiz primeiro, cMod como fallback.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.detectFiscalModel = detectFiscalModel;
+// Mapa de tags raiz → modelo
+const ROOT_TAG_MAP = {
+    nfeProc: 'nfe',
+    NFe: 'nfe',
+    cteProc: 'cte',
+    CTe: 'cte',
+    mdfeProc: 'mdfe',
+    MDFe: 'mdfe',
+    CompNfse: 'nfse',
+    Nfse: 'nfse',
+    ListaNfse: 'nfse',
+    ConsultarNfseResposta: 'nfse',
+    DeclaracaoPrestacaoServico: 'nfse',
+    NfseCabecMsg: 'nfse',
+    NfseMsg: 'nfse',
+};
+// Mapa de cMod → modelo (usado como fallback)
+const CMOD_MAP = {
+    '55': 'nfe',
+    '65': 'nfce',
+    '57': 'cte',
+    '62': 'cteos',
+    '58': 'mdfe',
+    '13': 'nfse',
+};
+const MODEL_META = {
+    nfe: { label: 'NF-e (mod. 55)', themeId: 'NFe Fiscal Pro — NF-e Dark', languageId: 'nfe' },
+    nfce: { label: 'NFC-e (mod. 65)', themeId: 'NFe Fiscal Pro — NFC-e Dark', languageId: 'nfce' },
+    cte: { label: 'CT-e (mod. 57)', themeId: 'NFe Fiscal Pro — CT-e Dark', languageId: 'cte' },
+    cteos: { label: 'CT-e OS (mod. 62)', themeId: 'NFe Fiscal Pro — CT-e Dark', languageId: 'cte' },
+    nfse: { label: 'NFS-e (mod. 13)', themeId: 'NFe Fiscal Pro — NFS-e Dark', languageId: 'nfse' },
+    mdfe: { label: 'MDF-e (mod. 58)', themeId: 'NFe Fiscal Pro — MDF-e Dark', languageId: 'mdfe' },
+    unknown: { label: 'XML Fiscal', themeId: 'NFe Fiscal Pro — NF-e Dark', languageId: 'nfe' },
+};
+/**
+ * Extrai as primeiras 30 linhas do conteúdo para análise rápida.
+ */
+function peekContent(content, lines = 30) {
+    return content.split('\n').slice(0, lines).join('\n');
+}
+/**
+ * Detecta o modelo pelo nome da tag raiz (primeira tag real encontrada).
+ */
+function detectByRootTag(peek) {
+    // Remove declaração XML e comentários
+    const clean = peek.replace(/<\?xml[^>]*>/g, '').replace(/<!--[\s\S]*?-->/g, '').trim();
+    // Pega a primeira tag de abertura
+    const match = clean.match(/<([A-Za-z][A-Za-z0-9_:]*)/);
+    if (!match)
+        return null;
+    // Remove namespace prefix se houver (ex: ns2:NFe → NFe)
+    const tagName = match[1].includes(':') ? match[1].split(':').pop() : match[1];
+    return ROOT_TAG_MAP[tagName] ?? null;
+}
+/**
+ * Detecta pelo cMod dentro do bloco <ide>.
+ */
+function detectByCMod(content) {
+    const match = content.match(/<mod>(\d+)<\/mod>/);
+    if (!match)
+        return null;
+    return CMOD_MAP[match[1]] ?? null;
+}
+/**
+ * Função principal de detecção com fallback encadeado.
+ * 1. Tag raiz
+ * 2. cMod
+ * 3. unknown
+ */
+function detectFiscalModel(xmlContent) {
+    const peek = peekContent(xmlContent);
+    // Tentativa 1: tag raiz
+    const byRoot = detectByRootTag(peek);
+    if (byRoot) {
+        // NF-e e NFC-e compartilham tags raiz — usa cMod pra diferenciar
+        if (byRoot === 'nfe') {
+            const byCmod = detectByCMod(xmlContent);
+            if (byCmod === 'nfce') {
+                return { model: 'nfce', ...MODEL_META['nfce'], detectedBy: 'cMod' };
+            }
+        }
+        return { model: byRoot, ...MODEL_META[byRoot], detectedBy: 'rootTag' };
+    }
+    // Tentativa 2: cMod
+    const byCmod = detectByCMod(xmlContent);
+    if (byCmod) {
+        return { model: byCmod, ...MODEL_META[byCmod], detectedBy: 'cMod' };
+    }
+    // Fallback
+    return { model: 'unknown', ...MODEL_META['unknown'], detectedBy: 'fallback' };
+}
+//# sourceMappingURL=modelDetector.js.map

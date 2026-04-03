@@ -1,0 +1,144 @@
+{
+  "name": "NFe Fiscal Pro — NF-e Harmonic Dark",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#0D1117",
+    "editor.foreground": "#C9D1D9",
+    "editor.lineHighlightBackground": "#161B22",
+    "editor.selectionBackground": "#23863644",
+    "editorCursor.foreground": "#C9D1D9",
+    "editorIndentGuide.background": "#161B22",
+    "editorIndentGuide.activeBackground": "#C9D1D9",
+    "editorWhitespace.foreground": "#484F58",
+    "editor.selectionHighlightBackground": "#23863644",
+    "editor.lineHighlightBorder": "#161B22"
+  },
+  "tokenColors": [
+    {
+      "name": "XML Declaration",
+      "scope": ["meta.xml-declaration.nfe", "comment.block.xml.nfe"],
+      "settings": { "foreground": "#8B949E", "fontStyle": "italic" }
+    },
+    {
+      "name": "XML Comment",
+      "scope": "comment.block.nfe",
+      "settings": { "foreground": "#8B949E", "fontStyle": "italic" }
+    },
+    {
+      "name": "Conteúdo valor",
+      "scope": "string.value.nfe",
+      "settings": { "foreground": "#F1E05A", "fontStyle": "bold" }
+    },
+    {
+      "name": "Pontuação Genérica (< >)",
+      "scope": "punctuation.definition.tag.nfe",
+      "settings": { "foreground": "#484F58" }
+    },
+    {
+      "name": "Tag suporte (nome)",
+      "scope": "support.type.tag.nfe",
+      "settings": { "foreground": "#FFAB70" }
+    },
+    {
+      "name": "Tag genérica",
+      "scope": ["entity.name.tag", "support.type.tag"],
+      "settings": { "foreground": "#F78166" }
+    },
+    {
+      "name": "Atributo — nome",
+      "scope": ["entity.other.attribute-name.nfe", "entity.other.attribute-name"],
+      "settings": { "foreground": "#7EE787" }
+    },
+    {
+      "name": "Atributo — valor",
+      "scope": ["string.quoted.double.nfe", "string.quoted.double"],
+      "settings": { "foreground": "#A5D6FF" }
+    },
+    {
+      "name": "Chave de Acesso",
+      "scope": "nfe.tag.chave.value",
+      "settings": { "foreground": "#73E3FF", "fontStyle": "bold underline" }
+    },
+    {
+      "name": "CNPJ",
+      "scope": ["nfe.tag.cnpj", "nfe.tag.cnpj punctuation.definition.tag", "nfe.tag.cnpj entity.name.tag"],
+      "settings": { "foreground": "#F2CC60", "fontStyle": "bold" }
+    },
+    {
+      "name": "CPF",
+      "scope": ["nfe.tag.cpf", "nfe.tag.cpf punctuation.definition.tag", "nfe.tag.cpf entity.name.tag"],
+      "settings": { "foreground": "#E3B341", "fontStyle": "bold" }
+    },
+
+
+    { "name": "raiz L0", "scope": ["nfe.tag.raiz.l0", "nfe.tag.raiz.l0 punctuation.definition.tag", "nfe.tag.raiz.l0 entity.name.tag"], "settings": { "foreground": "#C084FC", "fontStyle": "bold" } },
+    { "name": "raiz L1", "scope": ["nfe.tag.raiz.l1", "nfe.tag.raiz.l1 punctuation.definition.tag", "nfe.tag.raiz.l1 entity.name.tag"], "settings": { "foreground": "#A78BFA" } },
+
+    { "name": "inf L0",  "scope": ["nfe.tag.inf.l0", "nfe.tag.inf.l0 punctuation.definition.tag", "nfe.tag.inf.l0 entity.name.tag"],  "settings": { "foreground": "#818CF8", "fontStyle": "bold" } },
+    { "name": "inf L1",  "scope": ["nfe.tag.inf.l1", "nfe.tag.inf.l1 punctuation.definition.tag", "nfe.tag.inf.l1 entity.name.tag"],  "settings": { "foreground": "#6D83F0" } },
+
+    { "name": "ide L0",  "scope": ["nfe.tag.ide.l0", "nfe.tag.ide.l0 punctuation.definition.tag", "nfe.tag.ide.l0 entity.name.tag"],  "settings": { "foreground": "#60A5FA", "fontStyle": "bold" } },
+    { "name": "ide L1",  "scope": ["nfe.tag.ide.l1", "nfe.tag.ide.l1 punctuation.definition.tag", "nfe.tag.ide.l1 entity.name.tag"],  "settings": { "foreground": "#4D9DE8" } },
+    { "name": "ide L2",  "scope": ["nfe.tag.ide.l2", "nfe.tag.ide.l2 punctuation.definition.tag", "nfe.tag.ide.l2 entity.name.tag"],  "settings": { "foreground": "#3B94D8" } },
+
+    { "name": "emitdest L0", "scope": ["nfe.tag.emitdest.l0", "nfe.tag.emitdest.l0 punctuation.definition.tag", "nfe.tag.emitdest.l0 entity.name.tag"], "settings": { "foreground": "#38BDF8", "fontStyle": "bold" } },
+    { "name": "emitdest L1", "scope": ["nfe.tag.emitdest.l1", "nfe.tag.emitdest.l1 punctuation.definition.tag", "nfe.tag.emitdest.l1 entity.name.tag"], "settings": { "foreground": "#22CCE8" } },
+
+    { "name": "det L0",  "scope": ["nfe.tag.det.l0", "nfe.tag.det.l0 punctuation.definition.tag", "nfe.tag.det.l0 entity.name.tag"],  "settings": { "foreground": "#2DD4BF", "fontStyle": "bold" } },
+    { "name": "det L1",  "scope": ["nfe.tag.det.l1", "nfe.tag.det.l1 punctuation.definition.tag", "nfe.tag.det.l1 entity.name.tag"],  "settings": { "foreground": "#26D4AA" } },
+    { "name": "det L2",  "scope": ["nfe.tag.det.l2", "nfe.tag.det.l2 punctuation.definition.tag", "nfe.tag.det.l2 entity.name.tag"],  "settings": { "foreground": "#22D48F" } },
+    { "name": "det L3",  "scope": ["nfe.tag.det.l3", "nfe.tag.det.l3 punctuation.definition.tag", "nfe.tag.det.l3 entity.name.tag"],  "settings": { "foreground": "#20D475" } },
+
+    { "name": "total L0", "scope": ["nfe.tag.total.l0", "nfe.tag.total.l0 punctuation.definition.tag", "nfe.tag.total.l0 entity.name.tag"], "settings": { "foreground": "#4ADE80", "fontStyle": "bold" } },
+    { "name": "total L1", "scope": ["nfe.tag.total.l1", "nfe.tag.total.l1 punctuation.definition.tag", "nfe.tag.total.l1 entity.name.tag"], "settings": { "foreground": "#6AE895" } },
+    { "name": "total L2", "scope": ["nfe.tag.total.l2", "nfe.tag.total.l2 punctuation.definition.tag", "nfe.tag.total.l2 entity.name.tag"], "settings": { "foreground": "#8EEEA8" } },
+
+    { "name": "transp L0", "scope": ["nfe.tag.transp.l0", "nfe.tag.transp.l0 punctuation.definition.tag", "nfe.tag.transp.l0 entity.name.tag"], "settings": { "foreground": "#86EFAC", "fontStyle": "bold" } },
+    { "name": "transp L1", "scope": ["nfe.tag.transp.l1", "nfe.tag.transp.l1 punctuation.definition.tag", "nfe.tag.transp.l1 entity.name.tag"], "settings": { "foreground": "#A0F0BB" } },
+
+    { "name": "cob L0",  "scope": ["nfe.tag.cob.l0", "nfe.tag.cob.l0 punctuation.definition.tag", "nfe.tag.cob.l0 entity.name.tag"],  "settings": { "foreground": "#BEF264", "fontStyle": "bold" } },
+    { "name": "cob L1",  "scope": ["nfe.tag.cob.l1", "nfe.tag.cob.l1 punctuation.definition.tag", "nfe.tag.cob.l1 entity.name.tag"],  "settings": { "foreground": "#CFF285" } },
+
+    { "name": "infadic L0", "scope": ["nfe.tag.infadic.l0", "nfe.tag.infadic.l0 punctuation.definition.tag", "nfe.tag.infadic.l0 entity.name.tag"], "settings": { "foreground": "#FDE047", "fontStyle": "bold" } },
+    { "name": "infadic L1", "scope": ["nfe.tag.infadic.l1", "nfe.tag.infadic.l1 punctuation.definition.tag", "nfe.tag.infadic.l1 entity.name.tag"], "settings": { "foreground": "#FDDD68" } },
+
+    { "name": "prot L0", "scope": ["nfe.tag.prot.l0", "nfe.tag.prot.l0 punctuation.definition.tag", "nfe.tag.prot.l0 entity.name.tag"], "settings": { "foreground": "#FCD34D", "fontStyle": "bold" } },
+    { "name": "prot L1", "scope": ["nfe.tag.prot.l1", "nfe.tag.prot.l1 punctuation.definition.tag", "nfe.tag.prot.l1 entity.name.tag"], "settings": { "foreground": "#FBC76A" } },
+
+    { "name": "imposto L0", "scope": ["nfe.tag.imposto.l0", "nfe.tag.imposto.l0 punctuation.definition.tag", "nfe.tag.imposto.l0 entity.name.tag"], "settings": { "foreground": "#FBBF24", "fontStyle": "bold" } },
+    { "name": "imposto L1", "scope": ["nfe.tag.imposto.l1", "nfe.tag.imposto.l1 punctuation.definition.tag", "nfe.tag.imposto.l1 entity.name.tag"], "settings": { "foreground": "#F9CC52" } },
+    { "name": "imposto L2", "scope": ["nfe.tag.imposto.l2", "nfe.tag.imposto.l2 punctuation.definition.tag", "nfe.tag.imposto.l2 entity.name.tag"], "settings": { "foreground": "#F7D87E" } },
+
+    { "name": "icms L0", "scope": ["nfe.tag.icms.l0", "nfe.tag.icms.l0 punctuation.definition.tag", "nfe.tag.icms.l0 entity.name.tag"], "settings": { "foreground": "#F59E0B", "fontStyle": "bold" } },
+    { "name": "icms L1", "scope": ["nfe.tag.icms.l1", "nfe.tag.icms.l1 punctuation.definition.tag", "nfe.tag.icms.l1 entity.name.tag"], "settings": { "foreground": "#F5AA30" } },
+    { "name": "icms L2", "scope": ["nfe.tag.icms.l2", "nfe.tag.icms.l2 punctuation.definition.tag", "nfe.tag.icms.l2 entity.name.tag"], "settings": { "foreground": "#F5B855" } },
+    { "name": "icms L3", "scope": ["nfe.tag.icms.l3", "nfe.tag.icms.l3 punctuation.definition.tag", "nfe.tag.icms.l3 entity.name.tag"], "settings": { "foreground": "#F5C97A" } },
+    { "name": "icms L4", "scope": ["nfe.tag.icms.l4", "nfe.tag.icms.l4 punctuation.definition.tag", "nfe.tag.icms.l4 entity.name.tag"], "settings": { "foreground": "#F5D99F" } },
+
+    { "name": "ipi L0",  "scope": ["nfe.tag.ipi.l0", "nfe.tag.ipi.l0 punctuation.definition.tag", "nfe.tag.ipi.l0 entity.name.tag"],  "settings": { "foreground": "#FB923C", "fontStyle": "bold" } },
+    { "name": "ipi L1",  "scope": ["nfe.tag.ipi.l1", "nfe.tag.ipi.l1 punctuation.definition.tag", "nfe.tag.ipi.l1 entity.name.tag"],  "settings": { "foreground": "#F8A55A" } },
+    { "name": "ipi L2",  "scope": ["nfe.tag.ipi.l2", "nfe.tag.ipi.l2 punctuation.definition.tag", "nfe.tag.ipi.l2 entity.name.tag"],  "settings": { "foreground": "#F5B878" } },
+    { "name": "ipi L3",  "scope": ["nfe.tag.ipi.l3", "nfe.tag.ipi.l3 punctuation.definition.tag", "nfe.tag.ipi.l3 entity.name.tag"],  "settings": { "foreground": "#F2CA96" } },
+    { "name": "ipi L4",  "scope": ["nfe.tag.ipi.l4", "nfe.tag.ipi.l4 punctuation.definition.tag", "nfe.tag.ipi.l4 entity.name.tag"],  "settings": { "foreground": "#EFDBB4" } },
+
+    { "name": "pis L0",  "scope": ["nfe.tag.pis.l0", "nfe.tag.pis.l0 punctuation.definition.tag", "nfe.tag.pis.l0 entity.name.tag"],  "settings": { "foreground": "#F97316", "fontStyle": "bold" } },
+    { "name": "pis L1",  "scope": ["nfe.tag.pis.l1", "nfe.tag.pis.l1 punctuation.definition.tag", "nfe.tag.pis.l1 entity.name.tag"],  "settings": { "foreground": "#F68B3C" } },
+    { "name": "pis L2",  "scope": ["nfe.tag.pis.l2", "nfe.tag.pis.l2 punctuation.definition.tag", "nfe.tag.pis.l2 entity.name.tag"],  "settings": { "foreground": "#F4A362" } },
+    { "name": "pis L3",  "scope": ["nfe.tag.pis.l3", "nfe.tag.pis.l3 punctuation.definition.tag", "nfe.tag.pis.l3 entity.name.tag"],  "settings": { "foreground": "#F1BB88" } },
+    { "name": "pis L4",  "scope": ["nfe.tag.pis.l4", "nfe.tag.pis.l4 punctuation.definition.tag", "nfe.tag.pis.l4 entity.name.tag"],  "settings": { "foreground": "#EDD3AE" } },
+
+    { "name": "cofins L0", "scope": ["nfe.tag.cofins.l0", "nfe.tag.cofins.l0 punctuation.definition.tag", "nfe.tag.cofins.l0 entity.name.tag"], "settings": { "foreground": "#EF4444", "fontStyle": "bold" } },
+    { "name": "cofins L1", "scope": ["nfe.tag.cofins.l1", "nfe.tag.cofins.l1 punctuation.definition.tag", "nfe.tag.cofins.l1 entity.name.tag"], "settings": { "foreground": "#EE6A6A" } },
+    { "name": "cofins L2", "scope": ["nfe.tag.cofins.l2", "nfe.tag.cofins.l2 punctuation.definition.tag", "nfe.tag.cofins.l2 entity.name.tag"], "settings": { "foreground": "#ED9090" } },
+    { "name": "cofins L3", "scope": ["nfe.tag.cofins.l3", "nfe.tag.cofins.l3 punctuation.definition.tag", "nfe.tag.cofins.l3 entity.name.tag"], "settings": { "foreground": "#EBB6B6" } },
+    { "name": "cofins L4", "scope": ["nfe.tag.cofins.l4", "nfe.tag.cofins.l4 punctuation.definition.tag", "nfe.tag.cofins.l4 entity.name.tag"], "settings": { "foreground": "#EADCDC" } },
+
+    { "name": "nfse L0", "scope": ["nfe.tag.nfse.l0", "nfe.tag.nfse.l0 punctuation.definition.tag", "nfe.tag.nfse.l0 entity.name.tag"], "settings": { "foreground": "#C084FC", "fontStyle": "bold" } },
+    { "name": "nfse L1", "scope": ["nfe.tag.nfse.l1", "nfe.tag.nfse.l1 punctuation.definition.tag", "nfe.tag.nfse.l1 entity.name.tag"], "settings": { "foreground": "#A78BFA" } },
+    { "name": "nfse L2", "scope": ["nfe.tag.nfse.l2", "nfe.tag.nfse.l2 punctuation.definition.tag", "nfe.tag.nfse.l2 entity.name.tag"], "settings": { "foreground": "#818CF8" } },
+    { "name": "nfse L3", "scope": ["nfe.tag.nfse.l3", "nfe.tag.nfse.l3 punctuation.definition.tag", "nfe.tag.nfse.l3 entity.name.tag"], "settings": { "foreground": "#60A5FA" } },
+
+    { "name": "cte L0",  "scope": ["nfe.tag.cte.l0", "nfe.tag.cte.l0 punctuation.definition.tag", "nfe.tag.cte.l0 entity.name.tag"],  "settings": { "foreground": "#A78BFA", "fontStyle": "bold" } },
+    { "name": "cte L1",  "scope": ["nfe.tag.cte.l1", "nfe.tag.cte.l1 punctuation.definition.tag", "nfe.tag.cte.l1 entity.name.tag"],  "settings": { "foreground": "#818CF8" } }
+  ]
+}

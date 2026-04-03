@@ -1,0 +1,779 @@
+{
+  "name": "NFe Tools",
+  "scopeName": "source.nfe",
+  "fileTypes": [],
+  "patterns": [
+    { "include": "#xmlDeclaration" },
+    { "include": "#xmlComment" },
+    { "include": "#chaveAcesso" },
+    { "include": "#cnpjCpf" },
+    { "include": "#protNFe" },
+    { "include": "#raiz" },
+    { "include": "#infNFe" },
+    { "include": "#ide" },
+    { "include": "#emitDest" },
+    { "include": "#det" },
+    { "include": "#imposto" },
+    { "include": "#icms" },
+    { "include": "#ipi" },
+    { "include": "#pis" },
+    { "include": "#cofins" },
+    { "include": "#total" },
+    { "include": "#transp" },
+    { "include": "#cob" },
+    { "include": "#infAdic" },
+    { "include": "#nfse" },
+    { "include": "#cte" },
+    { "include": "#genericTag" },
+    { "include": "text.xml" }
+  ],
+  "repository": {
+    "xmlDeclaration": {
+      "match": "<\\?xml[^?]*\\?>",
+      "captures": {
+        "0": { "name": "comment.line.nfe" }
+      }
+    },
+    "xmlComment": {
+      "begin": "<!--",
+      "end": "-->",
+      "name": "comment.block.nfe"
+    },
+    "xmlAttribute": {
+      "match": "\\b([a-zA-Z0-9_:-]+)\\s*=\\s*(\"[^\"]*\"|'[^']*')",
+      "captures": {
+        "1": { "name": "entity.other.attribute-name.nfe" },
+        "2": { "name": "string.quoted.double.nfe" }
+      }
+    },
+    "raiz": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(nfeProc|NFe|cteProc|CTe|mdfeProc|MDFe|compNfse|NfseCabecMsg|NfseMsg)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.raiz.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(infNFeSupl|qrCode|urlChave)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.raiz.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        }
+      ]
+    },
+    "infNFe": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(infNFe|infCte|InfNfse|infMDFe)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.inf.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        }
+      ]
+    },
+    "ide": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(ide|IdentificacaoNfse|IdentificacaoRps|infMunFG)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.ide.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(cUF|cNF|natOp|mod|serie|nNF|nCT|dhEmi|dhSaiEnt|tpNF|tpCTe|idDest|cMunFG|tpImp|tpEmis|cDV|tpAmb|finNFe|indFinal|indPres|indIntermed|procEmi|verProc|dhCont|xJust|nNFSe|nRPS|nLote|dhRecimento|tpRPS|competencia|optSimplesNacional|incCultImunes|status|dCompetencia)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.ide.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(xNF|xRPS|xSerie)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.ide.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "emitDest": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(emit|dest|retirada|entrega|tomador|prestador|enderEmit|enderDest|enderTomador|enderPrestador|RpsSubstituido)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.emitdest.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(xNome|xFant|IE|IEST|IM|CRT|indIEDest|email|xLgr|nro|xCpl|xBairro|xMun|UF|CEP|cPais|xPais|fone|cMun|xUF)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.emitdest.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "cnpjCpf": {
+      "patterns": [
+        {
+          "match": "(<)(CNPJ|CNPJ_EMIT|CNPJ_TOM)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cnpj",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(CPF)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cpf",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "chaveAcesso": {
+      "patterns": [
+        {
+          "match": "(<)(chNFe|chCTe|chave|chAcesso)(>)([0-9]{44})(<\\/)(\\2)(>)",
+          "name": "nfe.tag.chave",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "nfe.tag.chave.value" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "\\b(Id)\\s*=\\s*\"(NFe[0-9]{44}|CTe[0-9]{44})\"",
+          "captures": {
+            "1": { "name": "entity.other.attribute-name.nfe" },
+            "2": { "name": "nfe.tag.chave.value" }
+          }
+        }
+      ]
+    },
+    "det": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(det)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.det.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(prod|infProdNFF|infProdEmb)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.det.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(cProd|cEAN|cEANTrib|cBarras|xProd|NCM|CEST|indEscala|CNPJFab|cBenef|EXTIPI|CFOP|uCom|qCom|vUnCom|vProd|cEANTrib|uTrib|qTrib|vUnTrib|vFrete|vSeg|vDesc|vOutro|indTot|xPed|nItemPed|nFCI|infAdProd)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.det.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(cSelo|qSelo|cEnq)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.det.l3",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "imposto": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(imposto|Impostos)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.imposto.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(tributacao|retencao|vTotTrib)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.imposto.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(vTotTrib)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.imposto.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "icms": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(ICMS)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.icms.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(ICMS00|ICMS10|ICMS20|ICMS30|ICMS40|ICMS41|ICMS50|ICMS51|ICMS60|ICMS70|ICMS90|ICMSSN101|ICMSSN102|ICMSSN201|ICMSSN202|ICMSSN500|ICMSSN900|ICMSPart|ICMSST|ICMSUFDest|ICMSTot)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.icms.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(orig|CST|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCP|pFCP|vFCP|vBCFCPST|pFCPST|vFCPST|vICMSDeson|motDesICMS|indDeduzDeson|vICMSOp|pDif|vICMSDif|vICMSEfet|pRedBCEfet|vBCEfet|pICMSEfet|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|vICMSSTDeson|motDesICMSST|vBCUFDest|vBCFCPUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.icms.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(vBC|vBCST|pICMS|pICMSST)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.icms.l3",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(vICMS|vICMSST|vFCP|vFCPST)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.icms.l4",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "ipi": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(IPI)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.ipi.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(IPITrib|IPINT)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.ipi.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(cEnq|CST|vBC|pIPI|qUnid|vUnid|vIPI|cSelo|qSelo|cIPI|vBCIPI)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.ipi.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(vIPI)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.ipi.l3",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "pis": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(PIS)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.pis.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(PISAliq|PISQtde|PISNT|PISOutr|PISTot)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.pis.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(CST|vBC|pPIS|qBCProd|vAliqProd|vPIS)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.pis.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(vPIS)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.pis.l3",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "cofins": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(COFINS)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.cofins.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "begin": "(<\\/?)(COFINSAliq|COFINSQtde|COFINSNT|COFINSOutr|COFINSTot)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.cofins.l1",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(CST|vBC|pCOFINS|qBCProd|vAliqProd|vCOFINS)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cofins.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(vCOFINS)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cofins.l3",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "total": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(total|ICMSTot|ISSQNtot|retTrib)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.total.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(vBC|vICMS|vICMSDeson|vFCP|vBCST|vST|vFCPST|vFCPSTRet|vProd|vFrete|vSeg|vDesc|vII|vIPI|vIPIDevol|vPIS|vCOFINS|vOutro|vNF|vTotTrib|vServ|vDeducoes|vInss|vIr|vCsll|vISS|vISSRet|dCompet|vDescIncond|vDescCond|cRegTrib|tpImune)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.total.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(vNF|vTotTrib|vServ)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.total.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "transp": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(transp|transporta|veicTransp|reboque|vol|lacres|infQ)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.transp.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(modFrete|CNPJ|CPF|xNome|IE|xEnder|xMun|UF|placa|RNTC|nLacre|qLiq|qBrut|pesoL|pesoB|nVol|esp|marca|nCont|tpMed|qCarga)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.transp.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "cob": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(cobr|fat|dup|pag|detPag|card)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.cob.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(nFat|vOrig|vDesc|vLiq|nDup|dVenc|vDup|indPag|tPag|vPag|tpIntegra|CNPJ|tBand|cAut|vTroco)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cob.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "infAdic": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(infAdic|obsItem|obsCont|obsFisco)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.infadic.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(infCpl|infAdicFisco|xTexto|xCampo)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.infadic.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "protNFe": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(protNFe|protCTe|infProt|retEnviNFe|retConsReciNFe|retConsStatServ)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.prot.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(tpAmb|verAplic|chNFe|dhRecbto|nProt|digVal|cStat|xMotivo|cUF|cMsg|xMsg)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.prot.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "nfse": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(CompNfse|Nfse|InfNfse|Prestador|Tomador|Servico|DeclaracaoPrestacaoServico|InfDeclaracaoPrestacaoServico|Rps|InfRps|ListaNfse|ConsultarNfseResposta)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.nfse.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(Numero|NumeroNfse|CodigoVerificacao|NumeroLote|DataEmissao|DataEmissaoRps|NaturezaOperacao|RegimeEspecialTributacao|OptanteSimplesNacional|IncentivadorCultural|Status|RpsSubstituido|Competencia)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.nfse.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(ItemListaServico|CodigoTributacaoMunicipio|CodigoNbs|Discriminacao|CodigoMunicipio|ExigibilidadeISS|MunicipioIncidencia)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.nfse.l2",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "match": "(<)(Aliquota|IssAliquota|AliquotaPis|AliquotaCofins|AliquotaIr|AliquotaCsll|AliquotaInss|ValorIss|ValorIssRetido|ValorServicos|ValorDeducoes|BaseCalculo|ValorLiquidoNfse|ValorIr|ValorCsll|ValorInss|ValorCofins|ValorPis)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.nfse.l3",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "cte": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(infCte|emit|rem|dest|receb|exped|infCTeNorm|infCarga|infModal|rodo|aereo|aquav|ferrov|duto|vPrest|comp|infNF|infNFe|infOutros|infDoc|infQ)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.cte.l0",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(vTPrest|vRec|vEmb|vCarga|vCargAverb|xComp|vComp|tpMed|qCarga|modal|CFOP|natOp|UFIni|UFFim|dhSaida|dhChegada|indGlobalizado|xObs)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cte.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "genericTag": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)([A-Za-z][A-Za-z0-9_:]*)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "support.type.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" }
+          },
+          "patterns": [
+            { "include": "#xmlAttribute" }
+          ]
+        }
+      ]
+    }
+  }
+}

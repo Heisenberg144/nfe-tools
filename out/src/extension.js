@@ -1,0 +1,100 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.activate = activate;
+exports.deactivate = deactivate;
+const vscode = __importStar(require("vscode"));
+const modelDetector_1 = require("./detector/modelDetector");
+const hoverProvider_1 = require("./hover/hoverProvider");
+// ─── Ativação ─────────────────────────────────────────────────────────────────
+function activate(context) {
+    console.log('NFe Tools: ativado');
+    // 1. Ao abrir qualquer XML, detecta e troca linguagem + tema
+    context.subscriptions.push(vscode.workspace.onDidOpenTextDocument(doc => handleXmlDocument(doc)), vscode.window.onDidChangeActiveTextEditor(editor => {
+        if (editor)
+            handleXmlDocument(editor.document);
+    }));
+    // 2. Se já tiver arquivo XML aberto ao ativar
+    if (vscode.window.activeTextEditor) {
+        handleXmlDocument(vscode.window.activeTextEditor.document);
+    }
+    // 3. Hover providers para todos os modelos fiscais
+    const fiscalLangs = ['nfe', 'nfce', 'cte', 'nfse', 'mdfe'];
+    for (const lang of fiscalLangs) {
+        context.subscriptions.push(vscode.languages.registerHoverProvider({ language: lang }, new hoverProvider_1.NfeHoverProvider()));
+    }
+    // 4. Comando manual
+    context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.openViewer', () => {
+        const editor = vscode.window.activeTextEditor;
+        if (editor)
+            handleXmlDocument(editor.document, true);
+    }));
+}
+function deactivate() { }
+// ─── Lógica de detecção e troca ───────────────────────────────────────────────
+async function handleXmlDocument(doc, forceNotify = false) {
+    // Só processa XML
+    if (!doc.fileName.endsWith('.xml') && doc.languageId !== 'xml')
+        return;
+    const content = doc.getText();
+    if (!content.trim())
+        return;
+    const result = (0, modelDetector_1.detectFiscalModel)(content);
+    if (result.model === 'unknown')
+        return;
+    // Troca a linguagem do arquivo para ativar a grammar correta
+    if (doc.languageId !== result.languageId) {
+        await vscode.languages.setTextDocumentLanguage(doc, result.languageId);
+    }
+    // Aplica o tema de cor correspondente
+    await applyTheme(result.themeId);
+    // Notificação discreta (apenas na primeira detecção ou quando forçado)
+    const key = `nfe-tools.notified.${doc.fileName}`;
+    const alreadyNotified = context_cache.has(key);
+    if (!alreadyNotified || forceNotify) {
+        context_cache.add(key);
+        vscode.window.setStatusBarMessage(`$(symbol-file) NFe Tools: ${result.label} detectado (via ${result.detectedBy})`, 5000);
+    }
+}
+async function applyTheme(themeId) {
+    const config = vscode.workspace.getConfiguration('workbench');
+    const current = config.get('colorTheme');
+    if (current === themeId)
+        return;
+    await config.update('colorTheme', themeId, vscode.ConfigurationTarget.Global);
+}
+// Cache simples para evitar notificações repetidas na mesma sessão
+const context_cache = new Set();
+//# sourceMappingURL=extension.js.map
