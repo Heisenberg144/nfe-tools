@@ -1,5 +1,5 @@
 {
-  "name": "NFe Fiscal — CT-e Dark",
+  "name": "CT-e Dark Theme",
   "type": "dark",
   "colors": {
     "editor.background": "#100e00",
@@ -120,7 +120,6 @@
     {
       "name": "raiz L0",
       "scope": [
-        "nfe.tag.raiz.l0",
         "nfe.tag.raiz.l0 punctuation.definition.tag",
         "nfe.tag.raiz.l0 entity.name.tag"
       ],
@@ -132,7 +131,6 @@
     {
       "name": "raiz L1",
       "scope": [
-        "nfe.tag.raiz.l1",
         "nfe.tag.raiz.l1 punctuation.definition.tag",
         "nfe.tag.raiz.l1 entity.name.tag"
       ],
@@ -143,7 +141,6 @@
     {
       "name": "inf L0",
       "scope": [
-        "nfe.tag.inf.l0",
         "nfe.tag.inf.l0 punctuation.definition.tag",
         "nfe.tag.inf.l0 entity.name.tag"
       ],
@@ -155,7 +152,6 @@
     {
       "name": "inf L1",
       "scope": [
-        "nfe.tag.inf.l1",
         "nfe.tag.inf.l1 punctuation.definition.tag",
         "nfe.tag.inf.l1 entity.name.tag"
       ],
@@ -166,7 +162,6 @@
     {
       "name": "ide L0",
       "scope": [
-        "nfe.tag.ide.l0",
         "nfe.tag.ide.l0 punctuation.definition.tag",
         "nfe.tag.ide.l0 entity.name.tag"
       ],
@@ -178,7 +173,6 @@
     {
       "name": "ide L1",
       "scope": [
-        "nfe.tag.ide.l1",
         "nfe.tag.ide.l1 punctuation.definition.tag",
         "nfe.tag.ide.l1 entity.name.tag"
       ],
@@ -189,7 +183,6 @@
     {
       "name": "ide L2",
       "scope": [
-        "nfe.tag.ide.l2",
         "nfe.tag.ide.l2 punctuation.definition.tag",
         "nfe.tag.ide.l2 entity.name.tag"
       ],
@@ -200,7 +193,6 @@
     {
       "name": "emitdest L0",
       "scope": [
-        "nfe.tag.emitdest.l0",
         "nfe.tag.emitdest.l0 punctuation.definition.tag",
         "nfe.tag.emitdest.l0 entity.name.tag"
       ],
@@ -212,7 +204,6 @@
     {
       "name": "emitdest L1",
       "scope": [
-        "nfe.tag.emitdest.l1",
         "nfe.tag.emitdest.l1 punctuation.definition.tag",
         "nfe.tag.emitdest.l1 entity.name.tag"
       ],
@@ -223,7 +214,6 @@
     {
       "name": "det L0",
       "scope": [
-        "nfe.tag.det.l0",
         "nfe.tag.det.l0 punctuation.definition.tag",
         "nfe.tag.det.l0 entity.name.tag"
       ],
@@ -235,7 +225,6 @@
     {
       "name": "det L1",
       "scope": [
-        "nfe.tag.det.l1",
         "nfe.tag.det.l1 punctuation.definition.tag",
         "nfe.tag.det.l1 entity.name.tag"
       ],
@@ -246,7 +235,6 @@
     {
       "name": "det L2",
       "scope": [
-        "nfe.tag.det.l2",
         "nfe.tag.det.l2 punctuation.definition.tag",
         "nfe.tag.det.l2 entity.name.tag"
       ],
@@ -257,7 +245,6 @@
     {
       "name": "det L3",
       "scope": [
-        "nfe.tag.det.l3",
         "nfe.tag.det.l3 punctuation.definition.tag",
         "nfe.tag.det.l3 entity.name.tag"
       ],
@@ -268,7 +255,6 @@
     {
       "name": "total L0",
       "scope": [
-        "nfe.tag.total.l0",
         "nfe.tag.total.l0 punctuation.definition.tag",
         "nfe.tag.total.l0 entity.name.tag"
       ],
@@ -280,7 +266,6 @@
     {
       "name": "total L1",
       "scope": [
-        "nfe.tag.total.l1",
         "nfe.tag.total.l1 punctuation.definition.tag",
         "nfe.tag.total.l1 entity.name.tag"
       ],
@@ -291,7 +276,6 @@
     {
       "name": "total L2",
       "scope": [
-        "nfe.tag.total.l2",
         "nfe.tag.total.l2 punctuation.definition.tag",
         "nfe.tag.total.l2 entity.name.tag"
       ],
@@ -302,7 +286,6 @@
     {
       "name": "transp L0",
       "scope": [
-        "nfe.tag.transp.l0",
         "nfe.tag.transp.l0 punctuation.definition.tag",
         "nfe.tag.transp.l0 entity.name.tag"
       ],
@@ -314,7 +297,6 @@
     {
       "name": "transp L1",
       "scope": [
-        "nfe.tag.transp.l1",
         "nfe.tag.transp.l1 punctuation.definition.tag",
         "nfe.tag.transp.l1 entity.name.tag"
       ],
@@ -325,7 +307,6 @@
     {
       "name": "cob L0",
       "scope": [
-        "nfe.tag.cob.l0",
         "nfe.tag.cob.l0 punctuation.definition.tag",
         "nfe.tag.cob.l0 entity.name.tag"
       ],
@@ -337,7 +318,6 @@
     {
       "name": "cob L1",
       "scope": [
-        "nfe.tag.cob.l1",
         "nfe.tag.cob.l1 punctuation.definition.tag",
         "nfe.tag.cob.l1 entity.name.tag"
       ],
@@ -348,7 +328,6 @@
     {
       "name": "infadic L0",
       "scope": [
-        "nfe.tag.infadic.l0",
         "nfe.tag.infadic.l0 punctuation.definition.tag",
         "nfe.tag.infadic.l0 entity.name.tag"
       ],
@@ -360,7 +339,6 @@
     {
       "name": "infadic L1",
       "scope": [
-        "nfe.tag.infadic.l1",
         "nfe.tag.infadic.l1 punctuation.definition.tag",
         "nfe.tag.infadic.l1 entity.name.tag"
       ],
@@ -371,7 +349,6 @@
     {
       "name": "prot L0",
       "scope": [
-        "nfe.tag.prot.l0",
         "nfe.tag.prot.l0 punctuation.definition.tag",
         "nfe.tag.prot.l0 entity.name.tag"
       ],
@@ -383,7 +360,6 @@
     {
       "name": "prot L1",
       "scope": [
-        "nfe.tag.prot.l1",
         "nfe.tag.prot.l1 punctuation.definition.tag",
         "nfe.tag.prot.l1 entity.name.tag"
       ],
@@ -394,7 +370,6 @@
     {
       "name": "imposto L0",
       "scope": [
-        "nfe.tag.imposto.l0",
         "nfe.tag.imposto.l0 punctuation.definition.tag",
         "nfe.tag.imposto.l0 entity.name.tag"
       ],
@@ -406,7 +381,6 @@
     {
       "name": "imposto L1",
       "scope": [
-        "nfe.tag.imposto.l1",
         "nfe.tag.imposto.l1 punctuation.definition.tag",
         "nfe.tag.imposto.l1 entity.name.tag"
       ],
@@ -417,7 +391,6 @@
     {
       "name": "imposto L2",
       "scope": [
-        "nfe.tag.imposto.l2",
         "nfe.tag.imposto.l2 punctuation.definition.tag",
         "nfe.tag.imposto.l2 entity.name.tag"
       ],
@@ -428,7 +401,6 @@
     {
       "name": "icms L0",
       "scope": [
-        "nfe.tag.icms.l0",
         "nfe.tag.icms.l0 punctuation.definition.tag",
         "nfe.tag.icms.l0 entity.name.tag"
       ],
@@ -440,7 +412,6 @@
     {
       "name": "icms L1",
       "scope": [
-        "nfe.tag.icms.l1",
         "nfe.tag.icms.l1 punctuation.definition.tag",
         "nfe.tag.icms.l1 entity.name.tag"
       ],
@@ -451,7 +422,6 @@
     {
       "name": "icms L2",
       "scope": [
-        "nfe.tag.icms.l2",
         "nfe.tag.icms.l2 punctuation.definition.tag",
         "nfe.tag.icms.l2 entity.name.tag"
       ],
@@ -462,7 +432,6 @@
     {
       "name": "icms L3",
       "scope": [
-        "nfe.tag.icms.l3",
         "nfe.tag.icms.l3 punctuation.definition.tag",
         "nfe.tag.icms.l3 entity.name.tag"
       ],
@@ -473,7 +442,6 @@
     {
       "name": "icms L4",
       "scope": [
-        "nfe.tag.icms.l4",
         "nfe.tag.icms.l4 punctuation.definition.tag",
         "nfe.tag.icms.l4 entity.name.tag"
       ],
@@ -484,7 +452,6 @@
     {
       "name": "ipi L0",
       "scope": [
-        "nfe.tag.ipi.l0",
         "nfe.tag.ipi.l0 punctuation.definition.tag",
         "nfe.tag.ipi.l0 entity.name.tag"
       ],
@@ -496,7 +463,6 @@
     {
       "name": "ipi L1",
       "scope": [
-        "nfe.tag.ipi.l1",
         "nfe.tag.ipi.l1 punctuation.definition.tag",
         "nfe.tag.ipi.l1 entity.name.tag"
       ],
@@ -507,7 +473,6 @@
     {
       "name": "ipi L2",
       "scope": [
-        "nfe.tag.ipi.l2",
         "nfe.tag.ipi.l2 punctuation.definition.tag",
         "nfe.tag.ipi.l2 entity.name.tag"
       ],
@@ -518,7 +483,6 @@
     {
       "name": "ipi L3",
       "scope": [
-        "nfe.tag.ipi.l3",
         "nfe.tag.ipi.l3 punctuation.definition.tag",
         "nfe.tag.ipi.l3 entity.name.tag"
       ],
@@ -529,7 +493,6 @@
     {
       "name": "ipi L4",
       "scope": [
-        "nfe.tag.ipi.l4",
         "nfe.tag.ipi.l4 punctuation.definition.tag",
         "nfe.tag.ipi.l4 entity.name.tag"
       ],
@@ -540,7 +503,6 @@
     {
       "name": "pis L0",
       "scope": [
-        "nfe.tag.pis.l0",
         "nfe.tag.pis.l0 punctuation.definition.tag",
         "nfe.tag.pis.l0 entity.name.tag"
       ],
@@ -552,7 +514,6 @@
     {
       "name": "pis L1",
       "scope": [
-        "nfe.tag.pis.l1",
         "nfe.tag.pis.l1 punctuation.definition.tag",
         "nfe.tag.pis.l1 entity.name.tag"
       ],
@@ -563,7 +524,6 @@
     {
       "name": "pis L2",
       "scope": [
-        "nfe.tag.pis.l2",
         "nfe.tag.pis.l2 punctuation.definition.tag",
         "nfe.tag.pis.l2 entity.name.tag"
       ],
@@ -574,7 +534,6 @@
     {
       "name": "pis L3",
       "scope": [
-        "nfe.tag.pis.l3",
         "nfe.tag.pis.l3 punctuation.definition.tag",
         "nfe.tag.pis.l3 entity.name.tag"
       ],
@@ -585,7 +544,6 @@
     {
       "name": "pis L4",
       "scope": [
-        "nfe.tag.pis.l4",
         "nfe.tag.pis.l4 punctuation.definition.tag",
         "nfe.tag.pis.l4 entity.name.tag"
       ],
@@ -596,7 +554,6 @@
     {
       "name": "cofins L0",
       "scope": [
-        "nfe.tag.cofins.l0",
         "nfe.tag.cofins.l0 punctuation.definition.tag",
         "nfe.tag.cofins.l0 entity.name.tag"
       ],
@@ -608,7 +565,6 @@
     {
       "name": "cofins L1",
       "scope": [
-        "nfe.tag.cofins.l1",
         "nfe.tag.cofins.l1 punctuation.definition.tag",
         "nfe.tag.cofins.l1 entity.name.tag"
       ],
@@ -619,7 +575,6 @@
     {
       "name": "cofins L2",
       "scope": [
-        "nfe.tag.cofins.l2",
         "nfe.tag.cofins.l2 punctuation.definition.tag",
         "nfe.tag.cofins.l2 entity.name.tag"
       ],
@@ -630,7 +585,6 @@
     {
       "name": "cofins L3",
       "scope": [
-        "nfe.tag.cofins.l3",
         "nfe.tag.cofins.l3 punctuation.definition.tag",
         "nfe.tag.cofins.l3 entity.name.tag"
       ],
@@ -641,7 +595,6 @@
     {
       "name": "cofins L4",
       "scope": [
-        "nfe.tag.cofins.l4",
         "nfe.tag.cofins.l4 punctuation.definition.tag",
         "nfe.tag.cofins.l4 entity.name.tag"
       ],
@@ -652,7 +605,6 @@
     {
       "name": "nfse L0",
       "scope": [
-        "nfe.tag.nfse.l0",
         "nfe.tag.nfse.l0 punctuation.definition.tag",
         "nfe.tag.nfse.l0 entity.name.tag"
       ],
@@ -664,7 +616,6 @@
     {
       "name": "nfse L1",
       "scope": [
-        "nfe.tag.nfse.l1",
         "nfe.tag.nfse.l1 punctuation.definition.tag",
         "nfe.tag.nfse.l1 entity.name.tag"
       ],
@@ -675,7 +626,6 @@
     {
       "name": "nfse L2",
       "scope": [
-        "nfe.tag.nfse.l2",
         "nfe.tag.nfse.l2 punctuation.definition.tag",
         "nfe.tag.nfse.l2 entity.name.tag"
       ],
@@ -686,7 +636,6 @@
     {
       "name": "nfse L3",
       "scope": [
-        "nfe.tag.nfse.l3",
         "nfe.tag.nfse.l3 punctuation.definition.tag",
         "nfe.tag.nfse.l3 entity.name.tag"
       ],
@@ -697,7 +646,6 @@
     {
       "name": "cte L0",
       "scope": [
-        "nfe.tag.cte.l0",
         "nfe.tag.cte.l0 punctuation.definition.tag",
         "nfe.tag.cte.l0 entity.name.tag"
       ],
@@ -709,12 +657,77 @@
     {
       "name": "cte L1",
       "scope": [
-        "nfe.tag.cte.l1",
         "nfe.tag.cte.l1 punctuation.definition.tag",
         "nfe.tag.cte.l1 entity.name.tag"
       ],
       "settings": {
         "foreground": "#FF6D00"
+      }
+    },
+    {
+      "name": "NFS-e Serviço",
+      "scope": [
+        "nfe.tag.nfse.servico punctuation.definition.tag",
+        "nfe.tag.nfse.servico entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#76FF03",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "NFS-e Valores",
+      "scope": [
+        "nfe.tag.nfse.valores punctuation.definition.tag",
+        "nfe.tag.nfse.valores entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#FFE57F",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "NFS-e Sujeito",
+      "scope": [
+        "nfe.tag.nfse.sujeito punctuation.definition.tag",
+        "nfe.tag.nfse.sujeito entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#FF9E40",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "CT-e Carga",
+      "scope": [
+        "nfe.tag.cte.carga punctuation.definition.tag",
+        "nfe.tag.cte.carga entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#CCFF90",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "CT-e Modal",
+      "scope": [
+        "nfe.tag.cte.modal punctuation.definition.tag",
+        "nfe.tag.cte.modal entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#FF6D00",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "MDF-e Veículo",
+      "scope": [
+        "nfe.tag.mdfe.veiculo punctuation.definition.tag",
+        "nfe.tag.mdfe.veiculo entity.name.tag"
+      ],
+      "settings": {
+        "foreground": "#FF8F00",
+        "fontStyle": "bold"
       }
     }
   ]

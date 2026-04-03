@@ -1,11 +1,18 @@
 import * as vscode from 'vscode';
 import { detectFiscalModel, FiscalModel } from './detector/modelDetector';
 import { NfeHoverProvider } from './hover/hoverProvider';
+import { promptAndDownloadXml } from './downloadXml';
+import { openViewer } from './openViewer';
+import { ToolsTreeProvider } from './toolsTreeProvider';
+import { formatXmlCommand } from './formatXml';
+import { validateXmlCommand } from './validateXml';
+import { exportPdfCommand } from './exportPdf';
+import { splitBatchCommand } from './detector/splitBatch';
 
 // Cache simples para evitar notificações repetidas na mesma sessão
 const context_cache = new Set<string>();
 
-// ─── Ativação ─────────────────────────────────────────────────────────────────
+//  Ativação da extensão 
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('NFe Tools: ativado');
@@ -24,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
   }
 
   // 3. Hover providers para todos os modelos fiscais
-  const fiscalLangs = ['nfe', 'nfce', 'cte', 'nfse', 'mdfe'];
+  const fiscalLangs = ['nfe', 'nfce', 'cte', 'nfse', 'mdfe', 'nfcom'];
   for (const lang of fiscalLangs) {
     context.subscriptions.push(
       vscode.languages.registerHoverProvider(
@@ -37,15 +44,51 @@ export function activate(context: vscode.ExtensionContext) {
   // 4. Comando manual
   context.subscriptions.push(
     vscode.commands.registerCommand('nfe-tools.openViewer', () => {
-      const editor = vscode.window.activeTextEditor;
-      if (editor) handleXmlDocument(editor.document, true);
+      openViewer(context);
     })
   );
+
+  // Comando de Formatação
+  context.subscriptions.push(
+    vscode.commands.registerCommand('nfe-tools.formatXml', () => {
+      formatXmlCommand();
+    })
+  );
+
+  // Comando de Validação
+  context.subscriptions.push(
+    vscode.commands.registerCommand('nfe-tools.validateXml', () => {
+      validateXmlCommand();
+    })
+  );
+
+  // Comando de Desmembrar Lotes
+  context.subscriptions.push(
+    vscode.commands.registerCommand('nfe-tools.splitBatch', () => {
+      splitBatchCommand();
+    })
+  );
+
+  // Comando de Exportar PDF
+  context.subscriptions.push(
+    vscode.commands.registerCommand('nfe-tools.exportPdf', () => {
+      exportPdfCommand();
+    })
+  );
+
+  // 5. Comando de Download via Chave de Acesso
+  context.subscriptions.push(
+    vscode.commands.registerCommand('nfe-tools.downloadXml', () => promptAndDownloadXml())
+  );
+
+  // 6. Barra Lateral de Ferramentas (TreeView)
+  const toolsProvider = new ToolsTreeProvider();
+  vscode.window.registerTreeDataProvider('nfe-tools-menu', toolsProvider);
 }
 
 export function deactivate() {}
 
-// ─── Lógica de detecção e troca ───────────────────────────────────────────────
+//  Lógica de detecção e troca 
 
 async function handleXmlDocument(
   doc: vscode.TextDocument,

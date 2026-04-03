@@ -1,3 +1,6 @@
+import { nfseDictionary } from './nfseDictionary';
+import { cteDictionary } from './cteDictionary';
+
 export interface NfeField {
   name: string;
   description: string;
@@ -35,38 +38,7 @@ export const nfeDictionary: Record<string, NfeTag> = {
     isBlock: true,
     models: ["65"]
   },
-  "cteProc": {
-    description: "Envelope de processamento do CT-e. Contém o CT-e e o protocolo de autorização.",
-    isBlock: true,
-    models: ["57", "62"]
-  },
-  "CTe": {
-    description: "Conhecimento de Transporte Eletrônico. Documento fiscal para prestação de serviços de transporte.",
-    isBlock: true,
-    models: ["57", "62"]
-  },
-  "infCte": {
-    description: "Grupo de informações do CT-e. Contém todos os dados do conhecimento de transporte.",
-    isBlock: true,
-    models: ["57", "62"]
-  },
-  "CompNfse": {
-    description: "Componente da NFS-e. Agrupa a nota de serviço e o cancelamento (quando houver).",
-    isBlock: true,
-    models: ["13"]
-  },
-  "Nfse": {
-    description: "Nota Fiscal de Serviços Eletrônica — padrão nacional (modelo 13).",
-    isBlock: true,
-    models: ["13"]
-  },
-  "InfNfse": {
-    description: "Informações da NFS-e. Contém identificação, prestador, tomador, serviço e valores.",
-    isBlock: true,
-    models: ["13"]
-  },
 
-  
   "ide": {
     description: "Identificação da NF-e ou CT-e. Contém dados como modelo, série, número, natureza da operação e datas.",
     isBlock: true,
@@ -157,9 +129,7 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55", "65", "57", "62"]
   },
 
-  // =====================================================================
   // CHAVE DE ACESSO / PROTOCOLO
-  // =====================================================================
 
   "chNFe": {
     description: "Chave de acesso da NF-e com 44 dígitos. Composição: cUF(2) + AAMM(4) + CNPJ(14) + mod(2) + serie(3) + nNF(9) + tpEmis(1) + cNF(8) + cDV(1).",
@@ -189,8 +159,6 @@ export const nfeDictionary: Record<string, NfeTag> = {
     description: "Descrição textual do status retornado pela SEFAZ (ex: 'Autorizado o uso da NF-e').",
     models: ["55", "65", "57", "62"]
   },
-
-  
 
   "emit": {
     description: "Identificação do emitente do documento fiscal.",
@@ -239,7 +207,6 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55", "65", "57", "62"]
   },
 
-  
 
   "dest": {
     description: "Identificação do destinatário do documento fiscal.",
@@ -623,9 +590,7 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55", "65"]
   },
 
-  // =====================================================================
   // TOTAIS
-  // =====================================================================
 
   "total": {
     description: "Totais do documento fiscal. Agrupa ICMSTot, ISSQNtot e retTrib.",
@@ -657,9 +622,7 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55", "65"]
   },
 
-  // =====================================================================
   // TRANSPORTE
-  // =====================================================================
 
   "transp": {
     description: "Informações sobre o transporte da mercadoria.",
@@ -686,9 +649,7 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55"]
   },
 
-  // =====================================================================
   // COBRANÇA / PAGAMENTO
-  // =====================================================================
 
   "cobr": {
     description: "Informações de cobrança (fatura e duplicatas).",
@@ -724,9 +685,7 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55", "65"]
   },
 
-  // =====================================================================
   // INFORMAÇÕES ADICIONAIS
-  // =====================================================================
 
   "infAdic": {
     description: "Informações adicionais do documento fiscal.",
@@ -742,163 +701,6 @@ export const nfeDictionary: Record<string, NfeTag> = {
     models: ["55", "65"]
   },
 
-  // =====================================================================
-  // CT-e ESPECÍFICO
-  // =====================================================================
-
-  "infCTeNorm": {
-    description: "Informações do CT-e Normal.",
-    isBlock: true,
-    models: ["57", "62"]
-  },
-  "infCarga": {
-    description: "Informações da carga transportada no CT-e.",
-    isBlock: true,
-    models: ["57", "62"]
-  },
-  "vCarga": {
-    description: "Valor total da carga para fins de averbação e seguro.",
-    models: ["57", "62"]
-  },
-  "proPP": {
-    description: "Produto Predominante da carga.",
-    models: ["57", "62"]
-  },
-  "infModal": {
-    description: "Informações do modal de transporte (rodoviário, aéreo, aquaviário, ferroviário, dutoviário).",
-    isBlock: true,
-    models: ["57", "62"]
-  },
-  "vTPrest": {
-    description: "**Valor total da prestação do serviço de transporte.** Campo dominante do CT-e.",
-    models: ["57", "62"]
-  },
-  "vRec": {
-    description: "Valor a receber pelo transportador.",
-    models: ["57", "62"]
-  },
-
-  // =====================================================================
-  // NFS-e ESPECÍFICO (Padrão Nacional — modelo 13)
-  // =====================================================================
-
-  "InfDeclaracaoPrestacaoServico": {
-    description: "Informações da declaração de prestação de serviço (DPS) da NFS-e padrão nacional.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "Rps": {
-    description: "Recibo Provisório de Serviços — documento que precede a NFS-e.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "InfRps": {
-    description: "Informações do RPS.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "Numero": {
-    description: "Número sequencial do RPS ou da NFS-e.",
-    models: ["13"]
-  },
-  "NumeroNfse": {
-    description: "Número da NFS-e emitida.",
-    models: ["13"]
-  },
-  "CodigoVerificacao": {
-    description: "Código de verificação da autenticidade da NFS-e.",
-    models: ["13"]
-  },
-  "Servico": {
-    description: "Dados do serviço prestado.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "ItemListaServico": {
-    description: "Código do item da lista de serviços (LC 116/2003). Ex: 1.01, 10.05.",
-    models: ["13"]
-  },
-  "CodigoTributacaoMunicipio": {
-    description: "Código de tributação municipal do serviço prestado.",
-    models: ["13"]
-  },
-  "Discriminacao": {
-    description: "Descrição detalhada dos serviços prestados (campo livre).",
-    models: ["13"]
-  },
-  "CodigoMunicipio": {
-    description: "Código IBGE do município de prestação do serviço.",
-    models: ["13"]
-  },
-  "Prestador": {
-    description: "Dados do prestador de serviços.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "Tomador": {
-    description: "Dados do tomador de serviços.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "ValoresNfse": {
-    description: "Valores totais da NFS-e.",
-    isBlock: true,
-    models: ["13"]
-  },
-  "ValorServicos": {
-    description: "**Valor total dos serviços prestados.** Campo dominante da NFS-e.",
-    models: ["13"]
-  },
-  "ValorDeducoes": {
-    description: "Valor total das deduções permitidas (materiais, subempreitadas, etc.).",
-    models: ["13"]
-  },
-  "BaseCalculo": {
-    description: "Base de cálculo do ISS = Valor dos Serviços - Deduções.",
-    models: ["13"]
-  },
-  "Aliquota": {
-    description: "Alíquota do ISS aplicada sobre a base de cálculo.",
-    models: ["13"]
-  },
-  "ValorIss": {
-    description: "Valor do ISS calculado.",
-    models: ["13"]
-  },
-  "ValorIssRetido": {
-    description: "Valor do ISS retido na fonte pelo tomador.",
-    models: ["13"]
-  },
-  "ValorLiquidoNfse": {
-    description: "**Valor líquido da NFS-e** = Valor dos Serviços - ISS Retido - Outras Retenções.",
-    models: ["13"]
-  },
-  "IssRetido": {
-    description: "Indica se houve retenção do ISS: **1**=Sim | **2**=Não.",
-    models: ["13"]
-  },
-  "Competencia": {
-    description: "Competência (mês/ano) de referência da prestação do serviço no formato AAAA-MM-DD.",
-    models: ["13"]
-  },
-  "ValorPis": {
-    description: "Valor do PIS retido pelo tomador.",
-    models: ["13"]
-  },
-  "ValorCofins": {
-    description: "Valor da COFINS retida pelo tomador.",
-    models: ["13"]
-  },
-  "ValorInss": {
-    description: "Valor do INSS retido pelo tomador.",
-    models: ["13"]
-  },
-  "ValorIr": {
-    description: "Valor do IR retido pelo tomador.",
-    models: ["13"]
-  },
-  "ValorCsll": {
-    description: "Valor da CSLL retida pelo tomador.",
-    models: ["13"]
-  }
+  ...nfseDictionary,
+  ...cteDictionary
 };

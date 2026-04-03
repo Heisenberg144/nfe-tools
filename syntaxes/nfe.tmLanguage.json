@@ -24,6 +24,7 @@
     { "include": "#infAdic" },
     { "include": "#nfse" },
     { "include": "#cte" },
+    { "include": "#mdfe" },
     { "include": "#genericTag" },
     { "include": "text.xml" }
   ],
@@ -678,7 +679,7 @@
     "nfse": {
       "patterns": [
         {
-          "begin": "(<\\/?)(CompNfse|Nfse|InfNfse|Prestador|Tomador|Servico|DeclaracaoPrestacaoServico|InfDeclaracaoPrestacaoServico|Rps|InfRps|ListaNfse|ConsultarNfseResposta)\\b",
+          "begin": "(<\\/?)(CompNfse|Nfse|InfNfse|DeclaracaoPrestacaoServico|InfDeclaracaoPrestacaoServico|Rps|InfRps|ListaNfse|ConsultarNfseResposta)\\b",
           "beginCaptures": {
             "1": { "name": "punctuation.definition.tag.nfe" },
             "2": { "name": "entity.name.tag.nfe" }
@@ -702,8 +703,19 @@
           }
         },
         {
+          "begin": "(<\\/?)(Servico)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.nfse.servico",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
           "match": "(<)(ItemListaServico|CodigoTributacaoMunicipio|CodigoNbs|Discriminacao|CodigoMunicipio|ExigibilidadeISS|MunicipioIncidencia)(>)([^<]*)(<\\/)(\\2)(>)",
-          "name": "nfe.tag.nfse.l2",
+          "name": "nfe.tag.nfse.servico",
           "captures": {
             "1": { "name": "punctuation.definition.tag.nfe" },
             "2": { "name": "entity.name.tag.nfe" },
@@ -715,8 +727,43 @@
           }
         },
         {
-          "match": "(<)(Aliquota|IssAliquota|AliquotaPis|AliquotaCofins|AliquotaIr|AliquotaCsll|AliquotaInss|ValorIss|ValorIssRetido|ValorServicos|ValorDeducoes|BaseCalculo|ValorLiquidoNfse|ValorIr|ValorCsll|ValorInss|ValorCofins|ValorPis)(>)([^<]*)(<\\/)(\\2)(>)",
-          "name": "nfe.tag.nfse.l3",
+          "begin": "(<\\/?)(ValoresNfse|Valores)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.nfse.valores",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(Aliquota|IssAliquota|AliquotaPis|AliquotaCofins|AliquotaIr|AliquotaCsll|AliquotaInss|ValorIss|ValorIssRetido|ValorServicos|ValorDeducoes|BaseCalculo|ValorLiquidoNfse|ValorIr|ValorCsll|ValorInss|ValorCofins|ValorPis|DescontoIncondicionado|DescontoCondicionado|OutrasRetencoes)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.nfse.valores",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "begin": "(<\\/?)(Prestador|Tomador|IdentificacaoPrestador|IdentificacaoTomador|Endereco|Contato)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.nfse.sujeito",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(CpfCnpj|Cnpj|Cpf|RazaoSocial|InscricaoMunicipal|InscricaoEstadual|Telefone|Email)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.nfse.sujeito",
           "captures": {
             "1": { "name": "punctuation.definition.tag.nfe" },
             "2": { "name": "entity.name.tag.nfe" },
@@ -732,7 +779,7 @@
     "cte": {
       "patterns": [
         {
-          "begin": "(<\\/?)(infCte|emit|rem|dest|receb|exped|infCTeNorm|infCarga|infModal|rodo|aereo|aquav|ferrov|duto|vPrest|comp|infNF|infNFe|infOutros|infDoc|infQ)\\b",
+          "begin": "(<\\/?)(infCte|emit|rem|dest|receb|exped|infCTeNorm|vPrest|comp|infNF|infNFe|infOutros|infDoc)\\b",
           "beginCaptures": {
             "1": { "name": "punctuation.definition.tag.nfe" },
             "2": { "name": "entity.name.tag.nfe" }
@@ -743,8 +790,84 @@
           "patterns": [{ "include": "#xmlAttribute" }]
         },
         {
-          "match": "(<)(vTPrest|vRec|vEmb|vCarga|vCargAverb|xComp|vComp|tpMed|qCarga|modal|CFOP|natOp|UFIni|UFFim|dhSaida|dhChegada|indGlobalizado|xObs)(>)([^<]*)(<\\/)(\\2)(>)",
+          "match": "(<)(vTPrest|vRec|vEmb|xComp|vComp|CFOP|natOp|UFIni|UFFim|dhSaida|dhChegada|indGlobalizado|xObs)(>)([^<]*)(<\\/)(\\2)(>)",
           "name": "nfe.tag.cte.l1",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "begin": "(<\\/?)(infCarga|infQ)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.cte.carga",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(vCarga|vCargAverb|proPP|xCarga|qCarga|tpMed|cUnid)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cte.carga",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        },
+        {
+          "begin": "(<\\/?)(infModal|rodo|aereo|aquav|ferrov|duto)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.cte.modal",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(modal|RNTRC|CIOT)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.cte.modal",
+          "captures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" },
+            "3": { "name": "punctuation.definition.tag.nfe" },
+            "4": { "name": "string.value.nfe" },
+            "5": { "name": "punctuation.definition.tag.nfe" },
+            "6": { "name": "entity.name.tag.nfe" },
+            "7": { "name": "punctuation.definition.tag.nfe" }
+          }
+        }
+      ]
+    },
+    "mdfe": {
+      "patterns": [
+        {
+          "begin": "(<\\/?)(veicTracao|veicReboque|condutor|prop|veicPrincipal)\\b",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.tag.nfe" },
+            "2": { "name": "entity.name.tag.nfe" }
+          },
+          "end": "(/?>)",
+          "endCaptures": { "1": { "name": "punctuation.definition.tag.nfe" } },
+          "name": "nfe.tag.mdfe.veiculo",
+          "patterns": [{ "include": "#xmlAttribute" }]
+        },
+        {
+          "match": "(<)(cInt|placa|RENAVAM|tara|capKG|capM3|tpRod|tpCar|UF|xNome|CPF|CNPJ)(>)([^<]*)(<\\/)(\\2)(>)",
+          "name": "nfe.tag.mdfe.veiculo",
           "captures": {
             "1": { "name": "punctuation.definition.tag.nfe" },
             "2": { "name": "entity.name.tag.nfe" },

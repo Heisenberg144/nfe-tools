@@ -3,7 +3,13 @@
   "displayName": "NFe Tools",
   "description": "Color themes e ferramentas para NF-e, NFC-e, CT-e, NFS-e e MDF-e",
   "version": "1.0.0",
-  "publisher": "nfe-tools",
+  "publisher": "adriangcirino",
+  "icon": "icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Heisenberg144/sped-fiscal-tools"
+  },
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Themes", "Other"],
   "activationEvents": [
@@ -34,6 +40,12 @@
       {
         "id": "nfse",
         "aliases": ["NFS-e", "nfse"],
+        "extensions": [],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "nfcom",
+        "aliases": ["NFCom", "nfcom"],
         "extensions": [],
         "configuration": "./language-configuration.json"
       },
@@ -69,36 +81,41 @@
         "language": "mdfe",
         "scopeName": "source.mdfe",
         "path": "./syntaxes/mdfe.tmLanguage.json"
+      },
+      {
+        "language": "nfcom",
+        "scopeName": "source.nfe",
+        "path": "./syntaxes/nfe.tmLanguage.json"
       }
     ],
     "themes": [
       {
-        "label": "NFe Fiscal Pro — NF-e Dark",
+        "label": "NF-e Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/nfe-dark.json"
       },
       {
-        "label": "NFe Fiscal Pro — NF-e Harmonic Dark",
+        "label": "NF-e Harmonic Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/nfe-harmonic-dark.json"
       },
       {
-        "label": "NFe Fiscal Pro — NFC-e Dark",
+        "label": "NFC-e Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/nfce-dark.json"
       },
       {
-        "label": "NFe Fiscal Pro — CT-e Dark",
+        "label": "CT-e Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/cte-dark.json"
       },
       {
-        "label": "NFe Fiscal Pro — NFS-e Dark",
+        "label": "NFS-e Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/nfse-dark.json"
       },
       {
-        "label": "NFe Fiscal Pro — MDF-e Dark",
+        "label": "MDF-e Dark Theme",
         "uiTheme": "vs-dark",
         "path": "./themes/mdfe-dark.json"
       }
@@ -107,6 +124,26 @@
       {
         "command": "nfe-tools.openViewer",
         "title": "NFe Tools: Abrir Visualizador"
+      },
+      {
+        "command": "nfe-tools.formatXml",
+        "title": "NFe Tools: Formatar/Identar XML"
+      },
+      {
+        "command": "nfe-tools.validateXml",
+        "title": "NFe Tools: Validar Tags Obrigatórias"
+      },
+      {
+        "command": "nfe-tools.splitBatch",
+        "title": "NFe Tools: Desmembrar Lote (Extrair Notas)"
+      },
+      {
+        "command": "nfe-tools.exportPdf",
+        "title": "NFe Tools: Exportar para PDF (DANFE/DACTE)"
+      },
+      {
+        "command": "nfe-tools.downloadXml",
+        "title": "NFe Tools: Baixar XML via Chave de Acesso"
       }
     ],
     "menus": {
@@ -115,8 +152,65 @@
           "command": "nfe-tools.openViewer",
           "when": "resourceExtname == .xml",
           "group": "navigation"
+        },
+        {
+          "command": "nfe-tools.formatXml",
+          "when": "resourceExtname == .xml",
+          "group": "navigation"
+        },
+        {
+          "command": "nfe-tools.validateXml",
+          "when": "resourceExtname == .xml",
+          "group": "navigation"
+        },
+        {
+          "command": "nfe-tools.exportPdf",
+          "when": "resourceExtname == .xml",
+          "group": "navigation"
+        },
+        {
+          "command": "nfe-tools.splitBatch",
+          "when": "resourceExtname == .xml",
+          "group": "navigation"
         }
       ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "nfe-tools-sidebar",
+          "title": "NFe Tools",
+          "icon": "$(file-code)"
+        }
+      ]
+    },
+    "views": {
+      "nfe-tools-sidebar": [
+        {
+          "id": "nfe-tools-menu",
+          "name": "Ações Rápidas"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "NFe Tools",
+      "properties": {
+        "nfe-tools.apiProvider": {
+          "type": "string",
+          "enum": [
+            "Nenhum (Portais Públicos)",
+            "Nuvem Fiscal",
+            "FSIST API"
+          ],
+          "default": "Nenhum (Portais Públicos)",
+          "description": "Selecione o provedor de API para fazer o download automático do XML em segundo plano."
+        },
+        "nfe-tools.apiToken": {
+          "type": "string",
+          "default": "",
+          "description": "Token de acesso (API Key) para o provedor escolhido."
+        }
+      }
     }
   },
   "scripts": {

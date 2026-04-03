@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ALL_THEMES = void 0;
 const PALETTES = {
-    // ─── NF-e: Arco-íris Neon (O "degradezão fodástico") ──────────────────────
+    //  NF-e: Arco-íris Neon
     nfe: {
         bg: '#0B0D14',
         bgLine: '#151826',
@@ -51,8 +51,14 @@ const PALETTES = {
         attrName: '#D19A66',
         attrValue: '#98C379',
         comment: '#5C6370',
+        nfseServico: '#00E676',
+        nfseValores: '#FF1744',
+        nfsePrestadorTomador: '#00E5FF',
+        cteCarga: '#69F0AE',
+        cteModal: '#3D5AFE',
+        mdfeVeiculo: '#FF9100',
     },
-    // ─── NF-e Harmonic: Aurora / Oceano para Pêssego (Lindo de se ver) ───────
+    //  NF-e Harmonic
     nfeHarmonic: {
         bg: '#0D1117',
         bgLine: '#161B22',
@@ -101,8 +107,14 @@ const PALETTES = {
         attrName: '#7EE787',
         attrValue: '#A5D6FF',
         comment: '#8B949E',
+        nfseServico: '#73E3FF',
+        nfseValores: '#A5D6A7',
+        nfsePrestadorTomador: '#79B8FF',
+        cteCarga: '#56D4C8',
+        cteModal: '#8992F3',
+        mdfeVeiculo: '#FFCB86',
     },
-    // ─── NFC-e: Ciano elétrico ────────────────────────────────────────────────
+    //  NFC-e: Ciano elétrico 
     nfce: {
         bg: '#08100f',
         bgLine: '#0e1a1a',
@@ -151,8 +163,14 @@ const PALETTES = {
         attrName: '#546E7A',
         attrValue: '#455A64',
         comment: '#1A3535',
+        nfseServico: '#FF6D00',
+        nfseValores: '#84FFFF',
+        nfsePrestadorTomador: '#A7FFEB',
+        cteCarga: '#FF9E40',
+        cteModal: '#64FFDA',
+        mdfeVeiculo: '#AA00FF',
     },
-    // ─── CT-e: Âmbar/dourado ─────────────────────────────────────────────────
+    //  CT-e: Âmbar 
     cte: {
         bg: '#100e00',
         bgLine: '#1a1700',
@@ -201,8 +219,14 @@ const PALETTES = {
         attrName: '#6D5700',
         attrValue: '#5C4A00',
         comment: '#332800',
+        nfseServico: '#76FF03',
+        nfseValores: '#FFE57F',
+        nfsePrestadorTomador: '#FF9E40',
+        cteCarga: '#CCFF90',
+        cteModal: '#FF6D00',
+        mdfeVeiculo: '#FF8F00',
     },
-    // ─── NFS-e: Roxo violeta ─────────────────────────────────────────────────
+    //  NFS-e: Roxo violeta 
     nfse: {
         bg: '#0d0a14',
         bgLine: '#160f22',
@@ -251,8 +275,14 @@ const PALETTES = {
         attrName: '#4A3066',
         attrValue: '#3D2660',
         comment: '#220F38',
+        nfseServico: '#CCFF90',
+        nfseValores: '#CE93D8',
+        nfsePrestadorTomador: '#B3E5FC',
+        cteCarga: '#E8FFD0',
+        cteModal: '#80D8FF',
+        mdfeVeiculo: '#EA80FC',
     },
-    // ─── MDF-e: Laranja intenso ───────────────────────────────────────────────
+    //  MDF-e: Laranja intenso 
     mdfe: {
         bg: '#100700',
         bgLine: '#1a0e00',
@@ -301,9 +331,19 @@ const PALETTES = {
         attrName: '#5C3317',
         attrValue: '#4A2800',
         comment: '#2C1500',
+        nfseServico: '#69F0AE',
+        nfseValores: '#FF9E40',
+        nfsePrestadorTomador: '#FFE082',
+        cteCarga: '#B9F6CA',
+        cteModal: '#FFCA28',
+        mdfeVeiculo: '#D500F9',
     },
 };
-// ─── Construtor de tokenColors ────────────────────────────────────────────────
+//  Construtor de tokenColors 
+//* Função utilitária para mapear escopos XML incluindo a pontuação e os nomes de entidade.
+function tagScope(base) {
+    return [`${base} punctuation.definition.tag`, `${base} entity.name.tag`];
+}
 function buildTokenColors(p) {
     return [
         {
@@ -361,60 +401,67 @@ function buildTokenColors(p) {
             scope: ['nfe.tag.cpf', 'nfe.tag.cpf punctuation.definition.tag', 'nfe.tag.cpf entity.name.tag'],
             settings: { foreground: p.cpf, fontStyle: 'bold' },
         },
-        // ── Lógica Dinâmica de Hierarquia (L0, L1, L2, L3) ──────────────────────
-        { name: 'raiz L0', scope: ["nfe.tag.raiz.l0", "nfe.tag.raiz.l0 punctuation.definition.tag", "nfe.tag.raiz.l0 entity.name.tag"], settings: { foreground: p.root, fontStyle: 'bold' } },
-        { name: 'raiz L1', scope: ["nfe.tag.raiz.l1", "nfe.tag.raiz.l1 punctuation.definition.tag", "nfe.tag.raiz.l1 entity.name.tag"], settings: { foreground: p.inf } },
-        { name: 'inf L0', scope: ["nfe.tag.inf.l0", "nfe.tag.inf.l0 punctuation.definition.tag", "nfe.tag.inf.l0 entity.name.tag"], settings: { foreground: p.inf, fontStyle: 'bold' } },
-        { name: 'inf L1', scope: ["nfe.tag.inf.l1", "nfe.tag.inf.l1 punctuation.definition.tag", "nfe.tag.inf.l1 entity.name.tag"], settings: { foreground: p.ide } },
-        { name: 'ide L0', scope: ["nfe.tag.ide.l0", "nfe.tag.ide.l0 punctuation.definition.tag", "nfe.tag.ide.l0 entity.name.tag"], settings: { foreground: p.ide, fontStyle: 'bold' } },
-        { name: 'ide L1', scope: ["nfe.tag.ide.l1", "nfe.tag.ide.l1 punctuation.definition.tag", "nfe.tag.ide.l1 entity.name.tag"], settings: { foreground: p.emitDest } },
-        { name: 'ide L2', scope: ["nfe.tag.ide.l2", "nfe.tag.ide.l2 punctuation.definition.tag", "nfe.tag.ide.l2 entity.name.tag"], settings: { foreground: p.det } },
-        { name: 'emitdest L0', scope: ["nfe.tag.emitdest.l0", "nfe.tag.emitdest.l0 punctuation.definition.tag", "nfe.tag.emitdest.l0 entity.name.tag"], settings: { foreground: p.emitDest, fontStyle: 'bold' } },
-        { name: 'emitdest L1', scope: ["nfe.tag.emitdest.l1", "nfe.tag.emitdest.l1 punctuation.definition.tag", "nfe.tag.emitdest.l1 entity.name.tag"], settings: { foreground: p.det } },
-        { name: 'det L0', scope: ["nfe.tag.det.l0", "nfe.tag.det.l0 punctuation.definition.tag", "nfe.tag.det.l0 entity.name.tag"], settings: { foreground: p.det, fontStyle: 'bold' } },
-        { name: 'det L1', scope: ["nfe.tag.det.l1", "nfe.tag.det.l1 punctuation.definition.tag", "nfe.tag.det.l1 entity.name.tag"], settings: { foreground: p.prod } },
-        { name: 'det L2', scope: ["nfe.tag.det.l2", "nfe.tag.det.l2 punctuation.definition.tag", "nfe.tag.det.l2 entity.name.tag"], settings: { foreground: p.imposto } },
-        { name: 'det L3', scope: ["nfe.tag.det.l3", "nfe.tag.det.l3 punctuation.definition.tag", "nfe.tag.det.l3 entity.name.tag"], settings: { foreground: p.icms } },
-        { name: 'total L0', scope: ["nfe.tag.total.l0", "nfe.tag.total.l0 punctuation.definition.tag", "nfe.tag.total.l0 entity.name.tag"], settings: { foreground: p.total, fontStyle: 'bold' } },
-        { name: 'total L1', scope: ["nfe.tag.total.l1", "nfe.tag.total.l1 punctuation.definition.tag", "nfe.tag.total.l1 entity.name.tag"], settings: { foreground: p.valorTotal } },
-        { name: 'total L2', scope: ["nfe.tag.total.l2", "nfe.tag.total.l2 punctuation.definition.tag", "nfe.tag.total.l2 entity.name.tag"], settings: { foreground: p.total } },
-        { name: 'transp L0', scope: ["nfe.tag.transp.l0", "nfe.tag.transp.l0 punctuation.definition.tag", "nfe.tag.transp.l0 entity.name.tag"], settings: { foreground: p.transp, fontStyle: 'bold' } },
-        { name: 'transp L1', scope: ["nfe.tag.transp.l1", "nfe.tag.transp.l1 punctuation.definition.tag", "nfe.tag.transp.l1 entity.name.tag"], settings: { foreground: p.cob } },
-        { name: 'cob L0', scope: ["nfe.tag.cob.l0", "nfe.tag.cob.l0 punctuation.definition.tag", "nfe.tag.cob.l0 entity.name.tag"], settings: { foreground: p.cob, fontStyle: 'bold' } },
-        { name: 'cob L1', scope: ["nfe.tag.cob.l1", "nfe.tag.cob.l1 punctuation.definition.tag", "nfe.tag.cob.l1 entity.name.tag"], settings: { foreground: p.infAdic } },
-        { name: 'infadic L0', scope: ["nfe.tag.infadic.l0", "nfe.tag.infadic.l0 punctuation.definition.tag", "nfe.tag.infadic.l0 entity.name.tag"], settings: { foreground: p.infAdic, fontStyle: 'bold' } },
-        { name: 'infadic L1', scope: ["nfe.tag.infadic.l1", "nfe.tag.infadic.l1 punctuation.definition.tag", "nfe.tag.infadic.l1 entity.name.tag"], settings: { foreground: p.prot } },
-        { name: 'prot L0', scope: ["nfe.tag.prot.l0", "nfe.tag.prot.l0 punctuation.definition.tag", "nfe.tag.prot.l0 entity.name.tag"], settings: { foreground: p.prot, fontStyle: 'bold' } },
-        { name: 'prot L1', scope: ["nfe.tag.prot.l1", "nfe.tag.prot.l1 punctuation.definition.tag", "nfe.tag.prot.l1 entity.name.tag"], settings: { foreground: p.root } },
-        { name: 'imposto L0', scope: ["nfe.tag.imposto.l0", "nfe.tag.imposto.l0 punctuation.definition.tag", "nfe.tag.imposto.l0 entity.name.tag"], settings: { foreground: p.imposto, fontStyle: 'bold' } },
-        { name: 'imposto L1', scope: ["nfe.tag.imposto.l1", "nfe.tag.imposto.l1 punctuation.definition.tag", "nfe.tag.imposto.l1 entity.name.tag"], settings: { foreground: p.icms } },
-        { name: 'imposto L2', scope: ["nfe.tag.imposto.l2", "nfe.tag.imposto.l2 punctuation.definition.tag", "nfe.tag.imposto.l2 entity.name.tag"], settings: { foreground: p.icmsAliq } },
-        { name: 'icms L0', scope: ["nfe.tag.icms.l0", "nfe.tag.icms.l0 punctuation.definition.tag", "nfe.tag.icms.l0 entity.name.tag"], settings: { foreground: p.icms, fontStyle: 'bold' } },
-        { name: 'icms L1', scope: ["nfe.tag.icms.l1", "nfe.tag.icms.l1 punctuation.definition.tag", "nfe.tag.icms.l1 entity.name.tag"], settings: { foreground: p.icmsAliq } },
-        { name: 'icms L2', scope: ["nfe.tag.icms.l2", "nfe.tag.icms.l2 punctuation.definition.tag", "nfe.tag.icms.l2 entity.name.tag"], settings: { foreground: p.icmsBase } },
-        { name: 'icms L3', scope: ["nfe.tag.icms.l3", "nfe.tag.icms.l3 punctuation.definition.tag", "nfe.tag.icms.l3 entity.name.tag"], settings: { foreground: p.icmsValor } },
-        { name: 'icms L4', scope: ["nfe.tag.icms.l4", "nfe.tag.icms.l4 punctuation.definition.tag", "nfe.tag.icms.l4 entity.name.tag"], settings: { foreground: p.icmsValor } },
-        { name: 'ipi L0', scope: ["nfe.tag.ipi.l0", "nfe.tag.ipi.l0 punctuation.definition.tag", "nfe.tag.ipi.l0 entity.name.tag"], settings: { foreground: p.ipi, fontStyle: 'bold' } },
-        { name: 'ipi L1', scope: ["nfe.tag.ipi.l1", "nfe.tag.ipi.l1 punctuation.definition.tag", "nfe.tag.ipi.l1 entity.name.tag"], settings: { foreground: p.ipiAliq } },
-        { name: 'ipi L2', scope: ["nfe.tag.ipi.l2", "nfe.tag.ipi.l2 punctuation.definition.tag", "nfe.tag.ipi.l2 entity.name.tag"], settings: { foreground: p.ipiBase } },
-        { name: 'ipi L3', scope: ["nfe.tag.ipi.l3", "nfe.tag.ipi.l3 punctuation.definition.tag", "nfe.tag.ipi.l3 entity.name.tag"], settings: { foreground: p.ipiValor } },
-        { name: 'ipi L4', scope: ["nfe.tag.ipi.l4", "nfe.tag.ipi.l4 punctuation.definition.tag", "nfe.tag.ipi.l4 entity.name.tag"], settings: { foreground: p.ipiValor } },
-        { name: 'pis L0', scope: ["nfe.tag.pis.l0", "nfe.tag.pis.l0 punctuation.definition.tag", "nfe.tag.pis.l0 entity.name.tag"], settings: { foreground: p.pis, fontStyle: 'bold' } },
-        { name: 'pis L1', scope: ["nfe.tag.pis.l1", "nfe.tag.pis.l1 punctuation.definition.tag", "nfe.tag.pis.l1 entity.name.tag"], settings: { foreground: p.pisAliq } },
-        { name: 'pis L2', scope: ["nfe.tag.pis.l2", "nfe.tag.pis.l2 punctuation.definition.tag", "nfe.tag.pis.l2 entity.name.tag"], settings: { foreground: p.pisBase } },
-        { name: 'pis L3', scope: ["nfe.tag.pis.l3", "nfe.tag.pis.l3 punctuation.definition.tag", "nfe.tag.pis.l3 entity.name.tag"], settings: { foreground: p.pisValor } },
-        { name: 'pis L4', scope: ["nfe.tag.pis.l4", "nfe.tag.pis.l4 punctuation.definition.tag", "nfe.tag.pis.l4 entity.name.tag"], settings: { foreground: p.pisValor } },
-        { name: 'cofins L0', scope: ["nfe.tag.cofins.l0", "nfe.tag.cofins.l0 punctuation.definition.tag", "nfe.tag.cofins.l0 entity.name.tag"], settings: { foreground: p.cofins, fontStyle: 'bold' } },
-        { name: 'cofins L1', scope: ["nfe.tag.cofins.l1", "nfe.tag.cofins.l1 punctuation.definition.tag", "nfe.tag.cofins.l1 entity.name.tag"], settings: { foreground: p.cofinsAliq } },
-        { name: 'cofins L2', scope: ["nfe.tag.cofins.l2", "nfe.tag.cofins.l2 punctuation.definition.tag", "nfe.tag.cofins.l2 entity.name.tag"], settings: { foreground: p.cofinsBase } },
-        { name: 'cofins L3', scope: ["nfe.tag.cofins.l3", "nfe.tag.cofins.l3 punctuation.definition.tag", "nfe.tag.cofins.l3 entity.name.tag"], settings: { foreground: p.cofinsValor } },
-        { name: 'cofins L4', scope: ["nfe.tag.cofins.l4", "nfe.tag.cofins.l4 punctuation.definition.tag", "nfe.tag.cofins.l4 entity.name.tag"], settings: { foreground: p.cofinsValor } },
-        { name: 'nfse L0', scope: ["nfe.tag.nfse.l0", "nfe.tag.nfse.l0 punctuation.definition.tag", "nfe.tag.nfse.l0 entity.name.tag"], settings: { foreground: p.root, fontStyle: 'bold' } },
-        { name: 'nfse L1', scope: ["nfe.tag.nfse.l1", "nfe.tag.nfse.l1 punctuation.definition.tag", "nfe.tag.nfse.l1 entity.name.tag"], settings: { foreground: p.inf } },
-        { name: 'nfse L2', scope: ["nfe.tag.nfse.l2", "nfe.tag.nfse.l2 punctuation.definition.tag", "nfe.tag.nfse.l2 entity.name.tag"], settings: { foreground: p.ide } },
-        { name: 'nfse L3', scope: ["nfe.tag.nfse.l3", "nfe.tag.nfse.l3 punctuation.definition.tag", "nfe.tag.nfse.l3 entity.name.tag"], settings: { foreground: p.det } },
-        { name: 'cte L0', scope: ["nfe.tag.cte.l0", "nfe.tag.cte.l0 punctuation.definition.tag", "nfe.tag.cte.l0 entity.name.tag"], settings: { foreground: p.inf, fontStyle: 'bold' } },
-        { name: 'cte L1', scope: ["nfe.tag.cte.l1", "nfe.tag.cte.l1 punctuation.definition.tag", "nfe.tag.cte.l1 entity.name.tag"], settings: { foreground: p.ide } },
+        // ── Lógica Dinâmica de Hierarquia (L0, L1, L2, L3) 
+        { name: 'raiz L0', scope: tagScope("nfe.tag.raiz.l0"), settings: { foreground: p.root, fontStyle: 'bold' } },
+        { name: 'raiz L1', scope: tagScope("nfe.tag.raiz.l1"), settings: { foreground: p.inf } },
+        { name: 'inf L0', scope: tagScope("nfe.tag.inf.l0"), settings: { foreground: p.inf, fontStyle: 'bold' } },
+        { name: 'inf L1', scope: tagScope("nfe.tag.inf.l1"), settings: { foreground: p.ide } },
+        { name: 'ide L0', scope: tagScope("nfe.tag.ide.l0"), settings: { foreground: p.ide, fontStyle: 'bold' } },
+        { name: 'ide L1', scope: tagScope("nfe.tag.ide.l1"), settings: { foreground: p.emitDest } },
+        { name: 'ide L2', scope: tagScope("nfe.tag.ide.l2"), settings: { foreground: p.det } },
+        { name: 'emitdest L0', scope: tagScope("nfe.tag.emitdest.l0"), settings: { foreground: p.emitDest, fontStyle: 'bold' } },
+        { name: 'emitdest L1', scope: tagScope("nfe.tag.emitdest.l1"), settings: { foreground: p.det } },
+        { name: 'det L0', scope: tagScope("nfe.tag.det.l0"), settings: { foreground: p.det, fontStyle: 'bold' } },
+        { name: 'det L1', scope: tagScope("nfe.tag.det.l1"), settings: { foreground: p.prod } },
+        { name: 'det L2', scope: tagScope("nfe.tag.det.l2"), settings: { foreground: p.imposto } },
+        { name: 'det L3', scope: tagScope("nfe.tag.det.l3"), settings: { foreground: p.icms } },
+        { name: 'total L0', scope: tagScope("nfe.tag.total.l0"), settings: { foreground: p.total, fontStyle: 'bold' } },
+        { name: 'total L1', scope: tagScope("nfe.tag.total.l1"), settings: { foreground: p.valorTotal } },
+        { name: 'total L2', scope: tagScope("nfe.tag.total.l2"), settings: { foreground: p.total } },
+        { name: 'transp L0', scope: tagScope("nfe.tag.transp.l0"), settings: { foreground: p.transp, fontStyle: 'bold' } },
+        { name: 'transp L1', scope: tagScope("nfe.tag.transp.l1"), settings: { foreground: p.cob } },
+        { name: 'cob L0', scope: tagScope("nfe.tag.cob.l0"), settings: { foreground: p.cob, fontStyle: 'bold' } },
+        { name: 'cob L1', scope: tagScope("nfe.tag.cob.l1"), settings: { foreground: p.infAdic } },
+        { name: 'infadic L0', scope: tagScope("nfe.tag.infadic.l0"), settings: { foreground: p.infAdic, fontStyle: 'bold' } },
+        { name: 'infadic L1', scope: tagScope("nfe.tag.infadic.l1"), settings: { foreground: p.prot } },
+        { name: 'prot L0', scope: tagScope("nfe.tag.prot.l0"), settings: { foreground: p.prot, fontStyle: 'bold' } },
+        { name: 'prot L1', scope: tagScope("nfe.tag.prot.l1"), settings: { foreground: p.root } },
+        { name: 'imposto L0', scope: tagScope("nfe.tag.imposto.l0"), settings: { foreground: p.imposto, fontStyle: 'bold' } },
+        { name: 'imposto L1', scope: tagScope("nfe.tag.imposto.l1"), settings: { foreground: p.icms } },
+        { name: 'imposto L2', scope: tagScope("nfe.tag.imposto.l2"), settings: { foreground: p.icmsAliq } },
+        { name: 'icms L0', scope: tagScope("nfe.tag.icms.l0"), settings: { foreground: p.icms, fontStyle: 'bold' } },
+        { name: 'icms L1', scope: tagScope("nfe.tag.icms.l1"), settings: { foreground: p.icmsAliq } },
+        { name: 'icms L2', scope: tagScope("nfe.tag.icms.l2"), settings: { foreground: p.icmsBase } },
+        { name: 'icms L3', scope: tagScope("nfe.tag.icms.l3"), settings: { foreground: p.icmsValor } },
+        { name: 'icms L4', scope: tagScope("nfe.tag.icms.l4"), settings: { foreground: p.icmsValor } },
+        { name: 'ipi L0', scope: tagScope("nfe.tag.ipi.l0"), settings: { foreground: p.ipi, fontStyle: 'bold' } },
+        { name: 'ipi L1', scope: tagScope("nfe.tag.ipi.l1"), settings: { foreground: p.ipiAliq } },
+        { name: 'ipi L2', scope: tagScope("nfe.tag.ipi.l2"), settings: { foreground: p.ipiBase } },
+        { name: 'ipi L3', scope: tagScope("nfe.tag.ipi.l3"), settings: { foreground: p.ipiValor } },
+        { name: 'ipi L4', scope: tagScope("nfe.tag.ipi.l4"), settings: { foreground: p.ipiValor } },
+        { name: 'pis L0', scope: tagScope("nfe.tag.pis.l0"), settings: { foreground: p.pis, fontStyle: 'bold' } },
+        { name: 'pis L1', scope: tagScope("nfe.tag.pis.l1"), settings: { foreground: p.pisAliq } },
+        { name: 'pis L2', scope: tagScope("nfe.tag.pis.l2"), settings: { foreground: p.pisBase } },
+        { name: 'pis L3', scope: tagScope("nfe.tag.pis.l3"), settings: { foreground: p.pisValor } },
+        { name: 'pis L4', scope: tagScope("nfe.tag.pis.l4"), settings: { foreground: p.pisValor } },
+        { name: 'cofins L0', scope: tagScope("nfe.tag.cofins.l0"), settings: { foreground: p.cofins, fontStyle: 'bold' } },
+        { name: 'cofins L1', scope: tagScope("nfe.tag.cofins.l1"), settings: { foreground: p.cofinsAliq } },
+        { name: 'cofins L2', scope: tagScope("nfe.tag.cofins.l2"), settings: { foreground: p.cofinsBase } },
+        { name: 'cofins L3', scope: tagScope("nfe.tag.cofins.l3"), settings: { foreground: p.cofinsValor } },
+        { name: 'cofins L4', scope: tagScope("nfe.tag.cofins.l4"), settings: { foreground: p.cofinsValor } },
+        { name: 'nfse L0', scope: tagScope("nfe.tag.nfse.l0"), settings: { foreground: p.root, fontStyle: 'bold' } },
+        { name: 'nfse L1', scope: tagScope("nfe.tag.nfse.l1"), settings: { foreground: p.inf } },
+        { name: 'nfse L2', scope: tagScope("nfe.tag.nfse.l2"), settings: { foreground: p.ide } },
+        { name: 'nfse L3', scope: tagScope("nfe.tag.nfse.l3"), settings: { foreground: p.det } },
+        { name: 'cte L0', scope: tagScope("nfe.tag.cte.l0"), settings: { foreground: p.inf, fontStyle: 'bold' } },
+        { name: 'cte L1', scope: tagScope("nfe.tag.cte.l1"), settings: { foreground: p.ide } },
+        //  Regras Específicas: NFS-e, CT-e, MDF-e 
+        { name: 'NFS-e Serviço', scope: tagScope("nfe.tag.nfse.servico"), settings: { foreground: p.nfseServico, fontStyle: 'bold' } },
+        { name: 'NFS-e Valores', scope: tagScope("nfe.tag.nfse.valores"), settings: { foreground: p.nfseValores, fontStyle: 'bold' } },
+        { name: 'NFS-e Sujeito', scope: tagScope("nfe.tag.nfse.sujeito"), settings: { foreground: p.nfsePrestadorTomador, fontStyle: 'bold' } },
+        { name: 'CT-e Carga', scope: tagScope("nfe.tag.cte.carga"), settings: { foreground: p.cteCarga, fontStyle: 'bold' } },
+        { name: 'CT-e Modal', scope: tagScope("nfe.tag.cte.modal"), settings: { foreground: p.cteModal, fontStyle: 'bold' } },
+        { name: 'MDF-e Veículo', scope: tagScope("nfe.tag.mdfe.veiculo"), settings: { foreground: p.mdfeVeiculo, fontStyle: 'bold' } },
     ];
 }
 function buildEditorColors(p) {
@@ -430,12 +477,12 @@ function buildEditorColors(p) {
     };
 }
 exports.ALL_THEMES = [
-    { filename: 'nfe-dark.json', theme: buildTheme('nfe', 'NFe Fiscal — NF-e Dark') },
-    { filename: 'nfe-harmonic-dark.json', theme: buildTheme('nfeHarmonic', 'NFe Fiscal Pro — NF-e Harmonic Dark') },
-    { filename: 'nfce-dark.json', theme: buildTheme('nfce', 'NFe Fiscal — NFC-e Dark') },
-    { filename: 'cte-dark.json', theme: buildTheme('cte', 'NFe Fiscal — CT-e Dark') },
-    { filename: 'nfse-dark.json', theme: buildTheme('nfse', 'NFe Fiscal — NFS-e Dark') },
-    { filename: 'mdfe-dark.json', theme: buildTheme('mdfe', 'NFe Fiscal — MDF-e Dark') },
+    { filename: 'nfe-dark.json', theme: buildTheme('nfe', 'NF-e Dark Theme') },
+    { filename: 'nfe-harmonic-dark.json', theme: buildTheme('nfeHarmonic', 'NF-e Harmonic Theme') },
+    { filename: 'nfce-dark.json', theme: buildTheme('nfce', 'NFC-e Dark Theme') },
+    { filename: 'cte-dark.json', theme: buildTheme('cte', 'CT-e Dark Theme') },
+    { filename: 'nfse-dark.json', theme: buildTheme('nfse', 'NFS-e Dark Theme') },
+    { filename: 'mdfe-dark.json', theme: buildTheme('mdfe', 'MDF-e Dark Theme') },
 ];
 function buildTheme(paletteId, themeName) {
     const palette = PALETTES[paletteId];

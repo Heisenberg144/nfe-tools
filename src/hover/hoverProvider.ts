@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { parseNfeLine } from '../nfeParser';
 import { resolveNfeTag, formatNfeHover } from '../nfeFieldResolver';
+import { detectFiscalModel } from '../detector/modelDetector';
 
 export class NfeHoverProvider implements vscode.HoverProvider {
   provideHover(
@@ -13,10 +14,17 @@ export class NfeHoverProvider implements vscode.HoverProvider {
     const parsed = parseNfeLine(line, cursor);
     if (!parsed) return null;
 
-    const resolved = resolveNfeTag(parsed.tagName, parsed.tagValue);
+    // Pega apenas as primeiras 30 linhas para não travar o VS Code em XMLs gigantes
+    const peekText = document.getText(new vscode.Range(0, 0, 30, 0));
+    
+    // Identifica se é NF-e, CT-e, NFS-e, etc.
+    const detection = detectFiscalModel(peekText);
+
+    // Passamos o modelo detectado para o resolver buscar a documentação correta
+    const resolved = resolveNfeTag(parsed.tagName, parsed.tagValue, detection.model);
     if (!resolved) return null;
 
-    const markdown = formatNfeHover(resolved);
+    const markdown = formatNfeHover(resolved, detection.model);
     const contents = new vscode.MarkdownString(markdown);
     contents.isTrusted = true;
 

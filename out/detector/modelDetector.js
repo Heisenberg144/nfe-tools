@@ -1,7 +1,7 @@
 "use strict";
 /**
  * Detecta o modelo fiscal de um XML de documento eletrônico.
- * Estratégia: tag raiz primeiro, cMod como fallback.
+ *  tag raiz primeiro, cMod como fallback.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.detectFiscalModel = detectFiscalModel;
@@ -11,8 +11,16 @@ const ROOT_TAG_MAP = {
     NFe: 'nfe',
     cteProc: 'cte',
     CTe: 'cte',
+    enviCTe: 'cte',
+    retEnviCTe: 'cte',
     mdfeProc: 'mdfe',
     MDFe: 'mdfe',
+    nfcomProc: 'nfcom',
+    NFCom: 'nfcom',
+    enviNFe: 'nfe',
+    retEnviNFe: 'nfe',
+    nfeCts: 'nfe',
+    resNFe: 'nfe',
     CompNfse: 'nfse',
     Nfse: 'nfse',
     ListaNfse: 'nfse',
@@ -20,24 +28,34 @@ const ROOT_TAG_MAP = {
     DeclaracaoPrestacaoServico: 'nfse',
     NfseCabecMsg: 'nfse',
     NfseMsg: 'nfse',
+    // Novas variações NFS-e 
+    GerarNfseResposta: 'nfse',
+    EnviarLoteRpsEnvio: 'nfse',
+    EnviarLoteRpsResposta: 'nfse',
+    RecepcionarLoteRps: 'nfse',
+    ConsultarNfseFaixaResposta: 'nfse',
+    ConsultarNfsePorRpsResposta: 'nfse',
+    ConsultarLoteRpsResposta: 'nfse'
 };
 // Mapa de cMod → modelo (usado como fallback)
 const CMOD_MAP = {
     '55': 'nfe',
     '65': 'nfce',
     '57': 'cte',
-    '62': 'cteos',
+    '67': 'cteos',
+    '62': 'nfcom',
     '58': 'mdfe',
     '13': 'nfse',
 };
 const MODEL_META = {
-    nfe: { label: 'NF-e (mod. 55)', themeId: 'NFe Fiscal Pro — NF-e Dark', languageId: 'nfe' },
-    nfce: { label: 'NFC-e (mod. 65)', themeId: 'NFe Fiscal Pro — NFC-e Dark', languageId: 'nfce' },
-    cte: { label: 'CT-e (mod. 57)', themeId: 'NFe Fiscal Pro — CT-e Dark', languageId: 'cte' },
-    cteos: { label: 'CT-e OS (mod. 62)', themeId: 'NFe Fiscal Pro — CT-e Dark', languageId: 'cte' },
-    nfse: { label: 'NFS-e (mod. 13)', themeId: 'NFe Fiscal Pro — NFS-e Dark', languageId: 'nfse' },
-    mdfe: { label: 'MDF-e (mod. 58)', themeId: 'NFe Fiscal Pro — MDF-e Dark', languageId: 'mdfe' },
-    unknown: { label: 'XML Fiscal', themeId: 'NFe Fiscal Pro — NF-e Dark', languageId: 'nfe' },
+    nfe: { label: 'NF-e (mod. 55)', themeId: 'NF-e Dark Theme', languageId: 'nfe' },
+    nfce: { label: 'NFC-e (mod. 65)', themeId: 'NFC-e Dark Theme', languageId: 'nfce' },
+    cte: { label: 'CT-e (mod. 57)', themeId: 'CT-e Dark Theme', languageId: 'cte' },
+    cteos: { label: 'CT-e OS (mod. 67)', themeId: 'CT-e Dark Theme', languageId: 'cte' },
+    nfse: { label: 'NFS-e (mod. 13)', themeId: 'NFS-e Dark Theme', languageId: 'nfse' },
+    mdfe: { label: 'MDF-e (mod. 58)', themeId: 'MDF-e Dark Theme', languageId: 'mdfe' },
+    nfcom: { label: 'NFCom (mod. 62)', themeId: 'NF-e Harmonic Theme', languageId: 'nfcom' },
+    unknown: { label: 'XML Fiscal', themeId: 'NF-e Dark Theme', languageId: 'nfe' },
 };
 /**
  * Extrai as primeiras 30 linhas do conteúdo para análise rápida.

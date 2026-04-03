@@ -38,9 +38,16 @@ exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
 const modelDetector_1 = require("./detector/modelDetector");
 const hoverProvider_1 = require("./hover/hoverProvider");
+const downloadXml_1 = require("./downloadXml");
+const openViewer_1 = require("./openViewer");
+const toolsTreeProvider_1 = require("./toolsTreeProvider");
+const formatXml_1 = require("./formatXml");
+const validateXml_1 = require("./validateXml");
+const exportPdf_1 = require("./exportPdf");
+const splitBatch_1 = require("./detector/splitBatch");
 // Cache simples para evitar notificações repetidas na mesma sessão
 const context_cache = new Set();
-// ─── Ativação ─────────────────────────────────────────────────────────────────
+//  Ativação da extensão 
 function activate(context) {
     console.log('NFe Tools: ativado');
     // 1. Ao abrir qualquer XML, detecta e troca linguagem + tema
@@ -53,19 +60,38 @@ function activate(context) {
         handleXmlDocument(vscode.window.activeTextEditor.document);
     }
     // 3. Hover providers para todos os modelos fiscais
-    const fiscalLangs = ['nfe', 'nfce', 'cte', 'nfse', 'mdfe'];
+    const fiscalLangs = ['nfe', 'nfce', 'cte', 'nfse', 'mdfe', 'nfcom'];
     for (const lang of fiscalLangs) {
         context.subscriptions.push(vscode.languages.registerHoverProvider({ language: lang }, new hoverProvider_1.NfeHoverProvider()));
     }
     // 4. Comando manual
     context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.openViewer', () => {
-        const editor = vscode.window.activeTextEditor;
-        if (editor)
-            handleXmlDocument(editor.document, true);
+        (0, openViewer_1.openViewer)(context);
     }));
+    // Comando de Formatação
+    context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.formatXml', () => {
+        (0, formatXml_1.formatXmlCommand)();
+    }));
+    // Comando de Validação
+    context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.validateXml', () => {
+        (0, validateXml_1.validateXmlCommand)();
+    }));
+    // Comando de Desmembrar Lotes
+    context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.splitBatch', () => {
+        (0, splitBatch_1.splitBatchCommand)();
+    }));
+    // Comando de Exportar PDF
+    context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.exportPdf', () => {
+        (0, exportPdf_1.exportPdfCommand)();
+    }));
+    // 5. Comando de Download via Chave de Acesso
+    context.subscriptions.push(vscode.commands.registerCommand('nfe-tools.downloadXml', () => (0, downloadXml_1.promptAndDownloadXml)()));
+    // 6. Barra Lateral de Ferramentas (TreeView)
+    const toolsProvider = new toolsTreeProvider_1.ToolsTreeProvider();
+    vscode.window.registerTreeDataProvider('nfe-tools-menu', toolsProvider);
 }
 function deactivate() { }
-// ─── Lógica de detecção e troca ───────────────────────────────────────────────
+//  Lógica de detecção e troca 
 async function handleXmlDocument(doc, forceNotify = false) {
     // Só processa XML
     if (!doc.fileName.endsWith('.xml') && doc.languageId !== 'xml')
